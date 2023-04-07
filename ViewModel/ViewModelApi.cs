@@ -79,6 +79,11 @@ namespace ViewModel
             }
         }
 
+        public bool IsDesibledHandler
+        {
+            get { return !isEnabled; }
+        }
+
         private void enable()
         {
             modelApi.MakeScene(ballCounter, radius);

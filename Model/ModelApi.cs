@@ -79,7 +79,7 @@ namespace Model
             {
                 List<BallLogic> ballslist = logicApi.GetBalls();
                 BallsListModel.Clear();
-                foreach (BallLogic orb in ballslist)
+                foreach (BallLogic ball in ballslist)
                 {
                     BallsListModel.Add(new BallModel(ball));
                 }
