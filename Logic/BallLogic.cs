@@ -4,7 +4,7 @@ using Data;
 
 namespace Logic
 {
-    internal class BallLogic : INotifyPropertyChanged
+    public class BallLogic : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
