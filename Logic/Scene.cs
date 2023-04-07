@@ -3,11 +3,11 @@ using Data;
 
 namespace Logic
 {
-    public class Scene
+    internal class Scene
     {
         private int _width;
         private int _height;
-        private List<Ball> _ballsList = new List<Ball>();
+        private List<BallLogic> _balls = new List<BallLogic>();
 
         public Scene(int width, int height)
         {
@@ -17,7 +17,7 @@ namespace Logic
 
         public void GenerateBallsList(int ballsAmount, int ballsRadius)
         {
-            _ballsList.Clear();
+            _balls.Clear();
 
             Random r = new Random();
 
@@ -26,13 +26,13 @@ namespace Logic
                 int x = r.Next(ballsRadius, _width - ballsRadius);
                 int y = r.Next(ballsRadius, _height - ballsRadius);
 
-                _ballsList.Add(new Ball(x, y, ballsRadius));
+                _balls.Add(new BallLogic(x, y, ballsRadius));
             }
 
         }
 
         public int Width => _width;
         public int Height => _height;
-        public List<Ball> BallsList => _ballsList;
+        public List<BallLogic> Balls => _balls;
     }
 }

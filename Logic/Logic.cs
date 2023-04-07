@@ -27,15 +27,18 @@ namespace Logic
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
 
-                //foreach(Ball ball in _scene.BallsList)
-                //{
-                //    Task task = new Task(() =>
-                //    {
+                foreach (BallLogic ball in _scene.Balls)
+                {
+                    Task task = new Task(() =>
+                    {
+                        while(true)
+                        {
 
-                //    });
+                        }
+                    });
 
-                //    task.Start();
-                //}
+                    task.Start();
+                }
             }
         }
     }
