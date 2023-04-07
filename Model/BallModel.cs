@@ -42,8 +42,6 @@ namespace Model
         }
 
         
-
-        #region x
         public int XHandler
         {
             get { return x; }
@@ -66,10 +64,6 @@ namespace Model
         // WhenPropertyChanged("x");
         //  }
 
-        #endregion x
-
-        #region y
-
         public int YHandler
         {
             get { return y; }
@@ -89,8 +83,6 @@ namespace Model
     //        y = ballModel.y;
       //      WhenPropertyChanged("y");
         //}
-
-        #endregion y
 
         public int RadiusHandler
         {
