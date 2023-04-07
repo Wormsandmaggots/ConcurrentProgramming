@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Data;
 
 namespace Logic
@@ -34,29 +35,44 @@ namespace Logic
             }
         }
 
+        public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
+        {
+            Random r = new Random();
+
+            int x = r.Next(-moveDistance, moveDistance);
+            int y = r.Next(-moveDistance, moveDistance);
+
+            if (_ball.X + x + _ball.Radius > xBorder)
+            {
+                _ball.X = xBorder - _ball.Radius;
+            }
+            else if (_ball.X + x - _ball.Radius < xBorder)
+            {
+                _ball.X = _ball.Radius;
+            }
+            else
+            {
+                _ball.X += x;
+            }
+
+
+            if (_ball.Y + y + _ball.Radius > yBorder)
+            {
+                _ball.Y = yBorder - _ball.Radius;
+            }
+            else if (_ball.Y + y - _ball.Radius < yBorder)
+            {
+                _ball.Y = _ball.Radius;
+            }
+            else
+            {
+                _ball.Y += y;
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public int X
-        {
-            get { return _ball.X; }
-            set
-            {
-                _ball.X = value;
-                OnPropertyChanged("Y");
-            }
-        }
-
-        public int Y
-        {
-            get { return _ball.Y; }
-            set
-            {
-                _ball.Y = value;
-                OnPropertyChanged("X");
-            }
         }
     }
 }

@@ -40,5 +40,7 @@ namespace Data
                 OnPropertyChanged("X");
             }
         }
+
+        public int Radius => _radius;
     }
 }

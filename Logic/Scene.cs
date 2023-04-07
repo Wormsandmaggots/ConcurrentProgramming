@@ -1,6 +1,4 @@
-﻿using System;
-using Data;
-
+﻿
 namespace Logic
 {
     internal class Scene

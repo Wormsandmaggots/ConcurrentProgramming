@@ -29,11 +29,13 @@ namespace Logic
 
                 foreach (BallLogic ball in _scene.Balls)
                 {
-                    Task task = new Task(() =>
+                    Task task = new Task(async () =>
                     {
                         while(true)
                         {
+                            ball.MoveBallRandomly(_scene.Width, _scene.Height,1);
 
+                            await Task.Delay(5);
                         }
                     });
 
