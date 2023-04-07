@@ -13,7 +13,7 @@
         <Button Content="Stop" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="70" Height="26" Command="{Binding DisableSignal}" Grid.Column="1" IsEnabled="{Binding IsDisabled, Mode=OneWay}"/>
 
         <Border BorderThickness="2" BorderBrush="Black" Height="520" Width="500">
-            <ItemsControl ItemsSource="{Binding Balls}">
+            <ItemsControl ItemsSource="{Binding BallsList}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas />
@@ -21,13 +21,13 @@
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Ellipse Width= "{Binding Diameter}" Height="{Binding Diameter}" Fill="Blue" />
+                        <Ellipse Width= "{Binding RadiusHandler}" Height="{Binding RadiusHandler}" Fill="Blue" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Top" Value="{Binding Top}" />
-                        <Setter Property="Canvas.Left" Value="{Binding Left}" />
+                        <Setter Property="Canvas.Top" Value="{Binding YHandler }" />
+                        <Setter Property="Canvas.Left" Value="{Binding YHandler}" />
                     </Style>
                 </ItemsControl.ItemContainerStyle>
             </ItemsControl>

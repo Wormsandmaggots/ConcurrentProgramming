@@ -31,7 +31,7 @@ namespace Model
             Ball toUpdateBall = (Ball)source;
 
             if(eventCh.PropertyName == "x")
-            {       //We need to think about movement of the ball...
+            {       //We need to talk over movement of the ball...
                 this.x = toUpdateBall.x + valueToMove; 
             }
             if(eventCh.PropertyName == "y")  
@@ -43,32 +43,58 @@ namespace Model
         
 
         #region x
-        public int getX(BallModel ballModel)
+        public int XHandler
         {
-            return ballModel.x;
+            get { return x; }
+            set
+            {
+                x = value;
+                WhenPropertyChanged("x");
+            }
         }
+        // public int getX(BallModel ballModel)
+        // {
+        //   return ballModel.x;
+        //  }
 
-        public void setX(BallModel ballModel)
-        {
-            x = ballModel.x;
-            WhenPropertyChanged("x");
-        }
+        //public void setX(BallModel ballModel)
+        //{
+        /// <summary>
+        ///  x = ballModel.x;
+        /// </summary>
+        // WhenPropertyChanged("x");
+        //  }
 
         #endregion x
 
         #region y
-        public int getY(BallModel ballModel)
-        {
-            return ballModel.y;
-        }
 
-        public void setY (BallModel ballModel)
+        public int YHandler
         {
-            y = ballModel.y;
-            WhenPropertyChanged("y");
+            get { return y; }
+            set
+            {
+                x = value;
+                WhenPropertyChanged("y");
+            }
         }
+       // public int getY(BallModel ballModel)
+       // {
+         //   return ballModel.y;
+        //}
+
+//        public void setY (BallModel ballModel)
+  //      {
+    //        y = ballModel.y;
+      //      WhenPropertyChanged("y");
+        //}
 
         #endregion y
+
+        public int RadiusHandler
+        {
+            get { return radius; } //no setter cause it's hardocded
+        }
 
     }
 }
