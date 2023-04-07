@@ -10,10 +10,10 @@ namespace Model
     public abstract class AbstractModelApi
     {
         //LogicApi placeholder for LogicApi
-        public static AbstractModelApi CreateApi(LogicApi logicApi = null)
-        {
-            return new ModelApi();
-        }
+        //public static AbstractModelApi CreateApi(LogicApi logicApi = null)
+        //{
+        //    return new ModelApi();
+        //}
 
         public abstract void MakeScene(int ballsCount, int radius);
         public abstract void Enable();
