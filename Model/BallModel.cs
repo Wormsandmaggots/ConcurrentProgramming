@@ -5,7 +5,7 @@ using Logic;
 
 namespace Model
 {
-    public class BallModel : INotifyPropertyChanged
+    public /*internal*/ class BallModel : INotifyPropertyChanged
     {
         public int x;
         public int y;
@@ -19,7 +19,6 @@ namespace Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        //"Ball" is a placeholder for class about Ball in Logic
         public BallModel(BallLogic ball)
         {
             this.x = ball.x;
@@ -52,18 +51,7 @@ namespace Model
                 WhenPropertyChanged("x");
             }
         }
-        // public int getX(BallModel ballModel)
-        // {
-        //   return ballModel.x;
-        //  }
 
-        //public void setX(BallModel ballModel)
-        //{
-        /// <summary>
-        ///  x = ballModel.x;
-        /// </summary>
-        // WhenPropertyChanged("x");
-        //  }
 
         public int YHandler
         {
@@ -74,16 +62,7 @@ namespace Model
                 WhenPropertyChanged("y");
             }
         }
-       // public int getY(BallModel ballModel)
-       // {
-         //   return ballModel.y;
-        //}
 
-//        public void setY (BallModel ballModel)
-  //      {
-    //        y = ballModel.y;
-      //      WhenPropertyChanged("y");
-        //}
 
         public int RadiusHandler
         {

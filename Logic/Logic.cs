@@ -2,7 +2,7 @@
 
 namespace Logic
 {
-    abstract class AbstractLogicApi
+    public abstract class AbstractLogicApi
     {
         public abstract void CreateScene(int width, int height, int ballsAmount, int radius);
 
