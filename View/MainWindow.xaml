@@ -8,7 +8,7 @@
         Title="MainWindow" Height="700" Width="900">
     <Grid>
 
-        <TextBox HorizontalAlignment="Left" Margin="21,14,0,0" Text="{Binding OrbQuantity, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="18"/>
+        <TextBox HorizontalAlignment="Left" Margin="21,14,0,0" Text="{Binding BallCounter, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="18"/>
         <Button Content="Start" HorizontalAlignment="Left" Margin="117,10,0,0" VerticalAlignment="Top" Width="70" Height="25" Command="{Binding EnableSignal}" IsEnabled="{Binding IsEnabled}"/>
         <Button Content="Stop" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="70" Height="26" Command="{Binding DisableSignal}" Grid.Column="1" IsEnabled="{Binding IsDisabled, Mode=OneWay}"/>
 

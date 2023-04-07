@@ -15,12 +15,14 @@ namespace Model
             return new ModelApi();
         }
 
-        public abstract void MakeScene();
+        public abstract void MakeScene(int ballsCount, int radius);
         public abstract void Enable();
 
         public abstract void Disable();
 
         public abstract bool IsEnabled();
+
+        public abstract ObservableCollection<BallModel> GetAllBalls();
 
         public sealed class ModelApi : AbstractModelApi
         {   
@@ -68,9 +70,20 @@ namespace Model
             }
 
             //Need parameters, waiting for logicApi.MakeScene() method
-            public override void MakeScene()
+            public override void MakeScene(int ballsCount, int radius)
             {
-                logicApi.MakeScene();
+                logicApi.CreateScene(520, 500, ballsCount, radius);
+            }
+
+            public override ObservableCollection<BallModel> GetAllBalls()
+            {
+                List<BallLogic> ballslist = logicApi.GetBalls();
+                BallsListModel.Clear();
+                foreach (BallLogic orb in ballslist)
+                {
+                    BallsListModel.Add(new BallModel(ball));
+                }
+                return BallsListModel;
             }
         }
     }

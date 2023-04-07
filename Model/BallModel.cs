@@ -4,22 +4,22 @@ using System.Runtime.CompilerServices;
 
 namespace Model
 {
-    public class BallModel
+    public class BallModel : INotifyPropertyChanged
     {
         public int x;
         public int y;
         //Idk if we need here radius, if it's hardcoded.
         public int radius;
 
-        public event PropertyChangedEventHandler PropretyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void WhenPropertyChanged([CallerMemberName] string name = null)
         {
-            this.PropretyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
         //"Ball" is a placeholder for class about Ball in Logic
-        public BallModel(Ball ball)
+        public BallModel(BallLogic ball)
         {
             this.x = ball.x;
             this.y = ball.y;
@@ -28,10 +28,11 @@ namespace Model
 
         public void Update (object source, int valueToMove, PropertyChangedEventArgs eventCh)
         {
-            Ball toUpdateBall = (Ball)source;
+            BallLogic toUpdateBall = (BallLogic)source;
 
             if(eventCh.PropertyName == "x")
-            {       //We need to talk over movement of the ball...
+            {
+                
                 this.x = toUpdateBall.x + valueToMove; 
             }
             if(eventCh.PropertyName == "y")  
