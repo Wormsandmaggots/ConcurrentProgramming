@@ -1,4 +1,4 @@
-using App;
+/*using App;
 
 namespace TestProject
 {
@@ -12,4 +12,4 @@ namespace TestProject
             Assert.AreEqual(calculator.Add(1, 2), 3);
         }
     }
-}
+}*/

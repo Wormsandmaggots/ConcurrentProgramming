@@ -11,7 +11,7 @@ namespace Model
     public abstract class AbstractModelApi
     {
         //LogicApi placeholder for LogicApi
-        public static AbstractModelApi CreateApi(LogicApi logicApi = null)
+        public static AbstractModelApi CreateApi(AbstractLogicApi logicApi = null)
         {
             return new ModelApi();
         }

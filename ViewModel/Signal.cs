@@ -1,6 +1,8 @@
-﻿namespace ViewModel
+﻿using System.Windows.Input;
+
+namespace ViewModel
 {
-    internal class Signal
+    internal class Signal :ICommand
     {
         private readonly Action execute;
         private readonly Func<bool> canExecute;
