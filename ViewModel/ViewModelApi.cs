@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace ViewModel
 {
-    internal class ViewModelApi : INotifyPropertyChanged
+    public class ViewModelApi : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -97,6 +97,8 @@ namespace ViewModel
             modelApi.Disable();
             isEnabled = false;
         }
+
+        public ViewModelApi() : this(null) { }
 
         public ViewModelApi(AbstractModelApi api = null)
         {

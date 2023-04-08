@@ -19,7 +19,6 @@ namespace Model
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
-        //"Ball" is a placeholder for class about Ball in Logic
         public BallModel(BallLogic ball)
         {
             this.x = ball.x;

@@ -28,7 +28,7 @@ namespace Model
         public sealed class ModelApi : AbstractModelApi
         {
             //same here waiting for AbstractLogicApi
-            private AbstractLogicApi logicApi = AbstractLogicApi.CreateApi(null);
+            private AbstractLogicApi logicApi = AbstractLogicApi.CreateApi();
             ObservableCollection<BallModel> balls = new ObservableCollection<BallModel>();
 
             public ObservableCollection<BallModel> BallsListModel
@@ -66,7 +66,7 @@ namespace Model
             }
 
             public override bool IsEnabled()
-            {
+           {
                 return logicApi.isEnabled();
             }
 
