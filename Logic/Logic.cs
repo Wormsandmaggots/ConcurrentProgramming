@@ -5,7 +5,7 @@ namespace Logic
     public abstract class AbstractLogicApi
     {
         public abstract void CreateScene(int width, int height, int ballsAmount, int radius);
-
+        public abstract BallLogic CreateBall(int width, int height, int radius);
         public static AbstractLogicApi CreateApi()
         {
             return new LogicApi();
@@ -41,6 +41,11 @@ namespace Logic
 
                     task.Start();
                 }
+            }
+
+            public override BallLogic CreateBall(int width, int height, int radius)
+            {
+                return new BallLogic(width, height, radius);
             }
         }
     }
