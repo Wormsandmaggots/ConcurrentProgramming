@@ -8,12 +8,11 @@ namespace Model
     {
         public int x;
         public int y;
-        //Idk if we need here radius, if it's hardcoded.
         public int radius;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        protected void OnPropertyChanged(string name)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -51,18 +50,6 @@ namespace Model
                 OnPropertyChanged("x");
             }
         }
-        // public int getX(BallModel ballModel)
-        // {
-        //   return ballModel.x;
-        //  }
-
-        //public void setX(BallModel ballModel)
-        //{
-        /// <summary>
-        ///  x = ballModel.x;
-        /// </summary>
-        // WhenPropertyChanged("x");
-        //  }
 
         public int YHandler
         {
@@ -73,16 +60,6 @@ namespace Model
                 OnPropertyChanged("y");
             }
         }
-       // public int getY(BallModel ballModel)
-       // {
-         //   return ballModel.y;
-        //}
-
-//        public void setY (BallModel ballModel)
-  //      {
-    //        y = ballModel.y;
-      //      WhenPropertyChanged("y");
-        //}
 
         public int RadiusHandler
         {

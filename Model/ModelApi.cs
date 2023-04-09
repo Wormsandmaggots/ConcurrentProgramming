@@ -5,7 +5,6 @@ namespace Model
 {
     public abstract class AbstractModelApi
     {
-        //LogicApi placeholder for LogicApi
         public static AbstractModelApi CreateApi(AbstractLogicApi logicApi = null)
         {
             return new ModelApi();
@@ -22,7 +21,6 @@ namespace Model
 
         public sealed class ModelApi : AbstractModelApi
         {
-            //same here waiting for AbstractLogicApi
             private AbstractLogicApi logicApi = AbstractLogicApi.CreateApi();
             ObservableCollection<BallModel> balls = new ObservableCollection<BallModel>();
 
@@ -65,7 +63,6 @@ namespace Model
                 return logicApi.IsEnabled();
             }
 
-            //Need parameters, waiting for logicApi.MakeScene() method
             public override void MakeScene(int ballsCount, int radius)
             {
                 logicApi.CreateScene(520, 500, ballsCount, radius);
