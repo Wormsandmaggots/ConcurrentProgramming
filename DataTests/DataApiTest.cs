@@ -20,10 +20,10 @@ namespace DataTests
         {
             Ball b = _dataApi.CreateBall(_x, _y, _radius);
 
-            Assert.AreNotEqual(b, null);
-            Assert.AreEqual(b.X, 0);
-            Assert.AreEqual(b.Y, 0);
-            Assert.AreEqual(b.Radius, 1);
+            Assert.IsNotNull(b, null);
+            Assert.AreEqual(b.X, _x);
+            Assert.AreEqual(b.Y, _y);
+            Assert.AreEqual(b.Radius, _radius);
         }
 
         [TestMethod]
