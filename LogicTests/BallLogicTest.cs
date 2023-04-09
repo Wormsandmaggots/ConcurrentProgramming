@@ -18,6 +18,9 @@ namespace LogicTests
 
             _x = 5;
             _y = 5;
+
+            _xBorder = 640;
+            _yBorder = 640;
         }
 
         [TestMethod]

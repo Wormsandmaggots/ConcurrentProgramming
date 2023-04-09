@@ -37,15 +37,25 @@ namespace Logic
         public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
         {
             Random r = new Random();
+            int[] tempArr = new int[] {-1, 0, 1};
 
-            int x = r.Next(-moveDistance, moveDistance);
-            int y = r.Next(-moveDistance, moveDistance);
+            int x = r.Next(-1, 2);
+            int y;
+
+            do
+            {
+                y = r.Next(-1, 2);
+
+            } while (x == 0 && y == 0);
+
+            x *= moveDistance;
+            y *= moveDistance;
 
             if (_ball.X + x + _ball.Radius > xBorder)
             {
                 _ball.X = xBorder - _ball.Radius;
             }
-            else if (_ball.X + x - _ball.Radius < xBorder)
+            else if (_ball.X + x - _ball.Radius < 0)
             {
                 _ball.X = _ball.Radius;
             }
@@ -59,7 +69,7 @@ namespace Logic
             {
                 _ball.Y = yBorder - _ball.Radius;
             }
-            else if (_ball.Y + y - _ball.Radius < yBorder)
+            else if (_ball.Y + y - _ball.Radius < 0)
             {
                 _ball.Y = _ball.Radius;
             }
