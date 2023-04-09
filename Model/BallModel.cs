@@ -21,9 +21,9 @@ namespace Model
 
         public BallModel(BallLogic ball)
         {
-            this.x = ball.x;
-            this.y = ball.y;
-            this.radius = ball.radius;
+            this.x = ball.X;
+            this.y = ball.Y;
+            this.radius = ball.Radius;
 
         }
 
@@ -34,11 +34,11 @@ namespace Model
             if(eventCh.PropertyName == "x")
             {
 
-                this.x = toUpdateBall.x + valueToMove;
+                this.x = toUpdateBall.X + valueToMove;
             }
             if(eventCh.PropertyName == "y")
             {
-                this.y = toUpdateBall.y + valueToMove;
+                this.y = toUpdateBall.Y + valueToMove;
             }
         }
 

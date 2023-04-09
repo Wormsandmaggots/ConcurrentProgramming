@@ -2,18 +2,15 @@
 
 namespace Logic
 {
-    abstract class AbstractLogicApi
+    public abstract class AbstractLogicApi
     {
         public abstract void CreateScene(int width, int height, int ballsAmount, int radius);
-<<<<<<< Updated upstream
 
-=======
         public abstract BallLogic CreateBall(int width, int height, int radius);
         public abstract List<BallLogic> GetBalls();
         public abstract void Enable();
         public abstract void Disable();
         public abstract bool IsEnabled();
->>>>>>> Stashed changes
         public static AbstractLogicApi CreateApi()
         {
             return new LogicApi();
@@ -53,9 +50,6 @@ namespace Logic
                     task.Start();
                 }
             }
-<<<<<<< Updated upstream
-=======
-
             public override BallLogic CreateBall(int width, int height, int radius)
             {
                 return new BallLogic(width, height, radius);
@@ -80,7 +74,6 @@ namespace Logic
             {
                 return _scene.Enabled;
             }
->>>>>>> Stashed changes
         }
     }
 }
