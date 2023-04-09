@@ -6,6 +6,7 @@ namespace Logic
         private int _width;
         private int _height;
         private List<BallLogic> _balls = new List<BallLogic>();
+        private bool _enabled;
 
         public Scene(int width, int height)
         {
@@ -27,10 +28,16 @@ namespace Logic
                 _balls.Add(new BallLogic(x, y, ballsRadius));
             }
 
+            _enabled = true;
         }
 
         public int Width => _width;
         public int Height => _height;
         public List<BallLogic> Balls => _balls;
+        public bool Enabled
+        {
+            get { return _enabled; }
+            set { _enabled = value; }
+        }
     }
 }
