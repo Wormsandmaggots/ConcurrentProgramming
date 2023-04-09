@@ -1,6 +1,4 @@
 ﻿
-using Logic;
-
 namespace LogicTests
 {
     [TestClass]
