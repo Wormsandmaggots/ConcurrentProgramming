@@ -5,7 +5,7 @@ namespace Logic
 {
     public class BallLogic : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private Ball _ball;
 
@@ -37,7 +37,9 @@ namespace Logic
         public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
         {
             Random r = new Random();
-            int[] tempArr = new int[] {-1, 0, 1};
+
+            int prevX = _ball.X;
+            int prevY = _ball.Y;
 
             int x = r.Next(-1, 2);
             int y;
@@ -61,7 +63,7 @@ namespace Logic
             }
             else
             {
-                _ball.X += x;
+                _ball.X = _ball.X + x;
             }
 
 
@@ -75,8 +77,14 @@ namespace Logic
             }
             else
             {
-                _ball.Y += y;
+                _ball.Y = _ball.Y + y;
             }
+
+            if (prevX != _ball.X)
+                _ball.OnPropertyChanged("X");
+
+            if (prevY != _ball.Y)
+                _ball.OnPropertyChanged("Y");
         }
 
         private void OnPropertyChanged(string propertyName)

@@ -26,6 +26,8 @@ namespace ViewModel
             }
             set
             {
+                if (value.Length == 0) return;
+
                 ballCounter = Convert.ToInt32(value);
                 OnPropertyChanged("BallCounter");
             }

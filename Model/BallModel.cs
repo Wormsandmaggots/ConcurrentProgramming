@@ -23,22 +23,24 @@ namespace Model
             this.x = ball.X;
             this.y = ball.Y;
             this.radius = ball.Radius;
-
+            ball.PropertyChanged += Update;
         }
 
-        public void Update (object source, int valueToMove, PropertyChangedEventArgs eventCh)
+        public void Update (object source, PropertyChangedEventArgs eventCh)
         {
             BallLogic toUpdateBall = (BallLogic)source;
 
-            if(eventCh.PropertyName == "x")
+            if(eventCh.PropertyName == "X")
             {
+                this.XHandler = toUpdateBall.X;
+                OnPropertyChanged("x");
+            }
+            else if(eventCh.PropertyName == "Y")
+            {
+                this.YHandler = toUpdateBall.Y;
+                OnPropertyChanged("y");
+            }
 
-                this.x = toUpdateBall.X + valueToMove;
-            }
-            if(eventCh.PropertyName == "y")
-            {
-                this.y = toUpdateBall.Y + valueToMove;
-            }
         }
 
 
@@ -48,6 +50,7 @@ namespace Model
             set
             {
                 x = value;
+                int i = 0;
                 OnPropertyChanged("x");
             }
         }
@@ -69,7 +72,7 @@ namespace Model
             get { return y; }
             set
             {
-                x = value;
+                y = value;
                 OnPropertyChanged("y");
             }
         }

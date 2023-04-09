@@ -41,7 +41,7 @@ namespace Logic
                             if (_scene.Enabled == false)
                                 continue;
 
-                            ball.MoveBallRandomly(_scene.Width, _scene.Height,1);
+                            ball.MoveBallRandomly(_scene.Width, _scene.Height, 40);
 
                             await Task.Delay(5);
                         }

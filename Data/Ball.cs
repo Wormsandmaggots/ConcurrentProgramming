@@ -4,7 +4,7 @@ namespace Data
 {
     public class Ball : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private int _x, _y;
         private int _radius;
@@ -27,7 +27,7 @@ namespace Data
             set
             {
                 _x = value;
-                OnPropertyChanged("Y");
+                OnPropertyChanged("X");
             }
         }
 
@@ -37,7 +37,7 @@ namespace Data
             set
             {
                 _y = value;
-                OnPropertyChanged("X");
+                OnPropertyChanged("Y");
             }
         }
 

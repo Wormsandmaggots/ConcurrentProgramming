@@ -47,14 +47,14 @@ namespace LogicTests
         [TestMethod]
         public void MoveBallTest()
         {
-            BallLogic b = new BallLogic(_x, _y, _radius);
+            BallLogic b = new BallLogic(-5, -5, _radius);
 
             for(int i = 0; i < 10; i++)
             {
                 b.MoveBallRandomly(_xBorder, _yBorder, _moveDistance);
 
-                Assert.IsTrue(b.X > _radius && b.X < _xBorder - _radius);
-                Assert.IsTrue(b.Y > _radius && b.Y < _yBorder - _radius);
+                Assert.IsTrue(b.X >= _radius && b.X <= _xBorder - _radius);
+                Assert.IsTrue(b.Y >= _radius && b.Y <= _yBorder - _radius);
             }
         }
     }
