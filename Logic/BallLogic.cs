@@ -74,5 +74,30 @@ namespace Logic
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public int X
+        {
+            get { return _ball.X; }
+            set
+            {
+                _ball.X = value;
+                OnPropertyChanged("X");
+            }
+        }
+
+        public int Y
+        {
+            get { return _ball.Y; }
+            set
+            {
+                _ball.Y = value;
+                OnPropertyChanged("Y");
+            }
+        }
+
+        public int Radius
+        {
+            get { return _ball.Radius; }
+        }
     }
 }
