@@ -1,5 +1,4 @@
-﻿using Data;
-
+﻿
 namespace Data
 {
     public abstract class AbstractDataApi

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using Logic;
 
 namespace Model
@@ -67,7 +62,7 @@ namespace Model
 
             public override bool IsEnabled()
            {
-                return logicApi.isEnabled();
+                return logicApi.IsEnabled();
             }
 
             //Need parameters, waiting for logicApi.MakeScene() method
