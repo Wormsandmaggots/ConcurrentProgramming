@@ -38,9 +38,6 @@ namespace Logic
         {
             Random r = new Random();
 
-            int prevX = _ball.X;
-            int prevY = _ball.Y;
-
             int x = r.Next(-1, 2);
             int y;
 
@@ -53,38 +50,32 @@ namespace Logic
             x *= moveDistance;
             y *= moveDistance;
 
-            if (_ball.X + x + _ball.Radius > xBorder)
+            if (X + x + Radius > xBorder)
             {
-                _ball.X = xBorder - _ball.Radius;
+                X = xBorder - Radius;
             }
-            else if (_ball.X + x - _ball.Radius < 0)
+            else if (X + x - Radius < 0)
             {
-                _ball.X = _ball.Radius;
+                X = Radius;
             }
             else
             {
-                _ball.X = _ball.X + x;
+                X = _ball.X + x;
             }
 
 
-            if (_ball.Y + y + _ball.Radius > yBorder)
+            if (Y + y + Radius > yBorder)
             {
-                _ball.Y = yBorder - _ball.Radius;
+                Y = yBorder - Radius;
             }
-            else if (_ball.Y + y - _ball.Radius < 0)
+            else if (Y + y - Radius < 0)
             {
-                _ball.Y = _ball.Radius;
+                Y = Radius;
             }
             else
             {
                 _ball.Y = _ball.Y + y;
             }
-
-            if (prevX != _ball.X)
-                _ball.OnPropertyChanged("X");
-
-            if (prevY != _ball.Y)
-                _ball.OnPropertyChanged("Y");
         }
 
         private void OnPropertyChanged(string propertyName)
@@ -98,7 +89,6 @@ namespace Logic
             set
             {
                 _ball.X = value;
-                OnPropertyChanged("X");
             }
         }
 
@@ -108,7 +98,6 @@ namespace Logic
             set
             {
                 _ball.Y = value;
-                OnPropertyChanged("Y");
             }
         }
 

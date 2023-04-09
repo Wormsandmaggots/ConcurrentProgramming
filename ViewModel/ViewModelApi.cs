@@ -104,7 +104,6 @@ namespace ViewModel
             if(api == null)
             {
                 this.modelApi = AbstractModelApi.CreateApi();
-
             }
             else
             {

@@ -33,12 +33,10 @@ namespace Model
             if(eventCh.PropertyName == "X")
             {
                 this.XHandler = toUpdateBall.X;
-                OnPropertyChanged("x");
             }
             else if(eventCh.PropertyName == "Y")
             {
                 this.YHandler = toUpdateBall.Y;
-                OnPropertyChanged("y");
             }
 
         }
@@ -50,7 +48,6 @@ namespace Model
             set
             {
                 x = value;
-                int i = 0;
                 OnPropertyChanged("x");
             }
         }
