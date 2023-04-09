@@ -13,7 +13,7 @@ namespace Model
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void WhenPropertyChanged([CallerMemberName] string name = null)
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -48,7 +48,7 @@ namespace Model
             set
             {
                 x = value;
-                WhenPropertyChanged("x");
+                OnPropertyChanged("x");
             }
         }
         // public int getX(BallModel ballModel)
@@ -70,7 +70,7 @@ namespace Model
             set
             {
                 x = value;
-                WhenPropertyChanged("y");
+                OnPropertyChanged("y");
             }
         }
        // public int getY(BallModel ballModel)

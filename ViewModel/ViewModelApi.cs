@@ -10,7 +10,7 @@ namespace ViewModel
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void WhenPropertyChanged([CallerMemberName] string name = null)
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
@@ -27,7 +27,7 @@ namespace ViewModel
             set
             {
                 ballCounter = Convert.ToInt32(value);
-                WhenPropertyChanged("BallCounter");
+                OnPropertyChanged("BallCounter");
             }
         }
 
@@ -57,7 +57,7 @@ namespace ViewModel
             {
                 if (value.Equals(this.ballList)) return;
                 ballList = value;
-                WhenPropertyChanged("BallsListHandler");
+                OnPropertyChanged("BallsListHandler");
             }
         }
 
@@ -69,7 +69,7 @@ namespace ViewModel
             set
             {
                 isEnabled = value;
-                WhenPropertyChanged("IsEnabled");
+                OnPropertyChanged("IsEnabled");
             }
         }
 
@@ -102,6 +102,7 @@ namespace ViewModel
             if(api == null)
             {
                 this.modelApi = AbstractModelApi.CreateApi();
+
             }
             else
             {
