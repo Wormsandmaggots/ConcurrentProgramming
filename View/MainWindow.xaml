@@ -13,7 +13,7 @@
         </Grid.DataContext>
         <TextBox HorizontalAlignment="Left" Margin="21,14,0,0" Text="{Binding BallCounterHandler, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Height="18"/>
         <Button Content="Start" HorizontalAlignment="Left" Margin="117,10,0,0" VerticalAlignment="Top" Width="70" Height="25" Command="{Binding EnableSignal}" IsEnabled="{Binding IsEnabledHandler}"/>
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="70" Height="26" Command="{Binding DisableSignal}" Grid.Column="1" IsEnabled="{Binding IsDesibledHandler, Mode=OneWay}"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="220,10,0,0" VerticalAlignment="Top" Width="70" Height="26" Command="{Binding DisableSignal}" Grid.Column="1" IsEnabled="{Binding IsEnabledHandler, Mode=OneWay}"/>
 
         <Border BorderThickness="2" BorderBrush="Black" Height="520" Width="500">
             <ItemsControl ItemsSource="{Binding BallsListHandler}">

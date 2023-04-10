@@ -29,7 +29,7 @@ namespace ViewModel
                 if (value.Length == 0) return;
 
                 ballCounter = Convert.ToInt32(value);
-                OnPropertyChanged("BallCounter");
+                OnPropertyChanged("BallCounterHandler");
             }
         }
 
@@ -71,14 +71,11 @@ namespace ViewModel
             set
             {
                 isEnabled = value;
-                OnPropertyChanged("IsEnabled");
+                OnPropertyChanged("IsEnabledHandler");
             }
         }
 
-        public bool IsDesibledHandler
-        {
-            get { return !isEnabled; }
-        }
+      
 
         private void enable()
         {
