@@ -12,9 +12,10 @@ namespace Model
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected void OnPropertyChanged(string name)
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
         }
 
         public BallModel(BallLogic ball)
@@ -47,7 +48,7 @@ namespace Model
             set
             {
                 x = value;
-                OnPropertyChanged("x");
+                OnPropertyChanged("XHandler");
             }
         }
 
@@ -57,7 +58,7 @@ namespace Model
             set
             {
                 y = value;
-                OnPropertyChanged("y");
+                OnPropertyChanged("YHandler");
             }
         }
 

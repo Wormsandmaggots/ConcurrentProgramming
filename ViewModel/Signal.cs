@@ -4,20 +4,27 @@ namespace ViewModel
 {
     internal class Signal :ICommand
     {
-        private readonly Action execute;
-        private readonly Func<bool> canExecute;
+        private Action execute;
+        private Func<bool> canExecute;
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler? CanExecuteChanged;
 
         public Signal(Action execute, Func<bool> canExecute = null)
         {
-            this.execute = execute;
-            this.canExecute = canExecute;
+            this.execute += execute;
+            this.canExecute += canExecute;
+        }
+
+        ~Signal()
+        {
+            execute = (Action)Delegate.RemoveAll(execute, execute);
+            canExecute = (Func<bool>)Delegate.RemoveAll(canExecute, canExecute);
+            CanExecuteChanged = null;
         }
 
         public void Execute(object name)
         {
-            this.execute(); 
+            execute?.Invoke();
         }
 
         public bool CanExecute(object name)
@@ -32,9 +39,9 @@ namespace ViewModel
             }
         }
 
-        internal void RiseCanExecuteChanged() 
+        internal void RiseCanExecuteChanged()
         {
-            CanExecuteChanged?.Invoke(this, EventArgs.Empty);    
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

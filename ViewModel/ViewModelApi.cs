@@ -111,6 +111,11 @@ namespace ViewModel
             }
         }
 
+        ~ ViewModelApi()
+        {
+            PropertyChanged = null;
+        }
+
 
     }
 }

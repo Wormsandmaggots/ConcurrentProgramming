@@ -22,6 +22,12 @@ namespace Logic
             _ball.PropertyChanged += Update;
         }
 
+        ~BallLogic()
+        {
+            PropertyChanged = null;
+            _ball.PropertyChanged -= Update;
+        }
+
         private void Update(object source, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "X")
@@ -60,7 +66,7 @@ namespace Logic
             }
             else
             {
-                X = _ball.X + x;
+                X = X + x;
             }
 
 
@@ -74,7 +80,7 @@ namespace Logic
             }
             else
             {
-                _ball.Y = _ball.Y + y;
+                Y = Y + y;
             }
         }
 
