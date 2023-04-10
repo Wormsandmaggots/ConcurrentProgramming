@@ -1,8 +1,6 @@
 using Logic;
-using Microsoft.VisualBasic;
 using Model;
 using System.Collections.ObjectModel;
-using static Model.AbstractModelApi;
 
 namespace ModelTest
 {
