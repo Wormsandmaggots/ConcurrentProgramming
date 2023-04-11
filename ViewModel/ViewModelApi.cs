@@ -16,7 +16,7 @@ namespace ViewModel
         }
 
         private int ballCounter = 1;
-        AbstractModelApi modelApi;
+        public AbstractModelApi modelApi;
 
         public string BallCounterHandler
         {
@@ -77,7 +77,7 @@ namespace ViewModel
 
       
 
-        private void enable()
+        public void enable()
         {
             modelApi.MakeScene(ballCounter, radius);
             modelApi.Enable();
@@ -85,7 +85,7 @@ namespace ViewModel
             BallsListHandler = modelApi.GetAllBalls();
         }
 
-        private void disable()
+        public void disable()
         {
             modelApi.Disable();
             isEnabled = false;

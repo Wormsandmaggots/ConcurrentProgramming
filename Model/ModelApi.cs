@@ -5,10 +5,21 @@ namespace Model
 {
     public abstract class AbstractModelApi
     {
+
         public static AbstractModelApi CreateApi(AbstractLogicApi logicApi = null)
-        {
-            return new ModelApi();
+        {   
+            if(logicApi == null)
+            {           
+                AbstractLogicApi api = AbstractLogicApi.CreateApi();
+                return new ModelApi(api);
+            }
+            else
+            {
+                return new ModelApi();
+            }
+
         }
+
 
         public abstract void MakeScene(int ballsCount, int radius);
         public abstract void Enable();
