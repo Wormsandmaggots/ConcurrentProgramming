@@ -1,4 +1,3 @@
-using Logic;
 using Model;
 using ViewModel;
 
@@ -26,7 +25,7 @@ namespace ViewModelTest
         {
 
             Assert.IsNotNull(api);
-            Assert.AreEqual(api.modelApi, abstractModelApi);
+            Assert.AreEqual(api.GetModelApi(), abstractModelApi);
         }
 
         [TestMethod]

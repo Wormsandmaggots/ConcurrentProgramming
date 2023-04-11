@@ -16,8 +16,12 @@ namespace ViewModel
         }
 
         private int ballCounter = 1;
-        public AbstractModelApi modelApi;
+        AbstractModelApi modelApi;
 
+        public AbstractModelApi GetModelApi()
+        {
+            return modelApi;
+        }
         public string BallCounterHandler
         {
             get
