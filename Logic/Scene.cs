@@ -20,12 +20,14 @@ namespace Logic
 
             Random r = new Random();
 
+            AbstractLogicApi api = AbstractLogicApi.CreateApi();
+
             for (int i = 0; i < ballsAmount; i++)
             {
                 int x = r.Next(ballsRadius, _width - ballsRadius);
                 int y = r.Next(ballsRadius, _height - ballsRadius);
 
-                _balls.Add(new BallLogic(x, y, ballsRadius));
+                _balls.Add(api.CreateBall(x,y, ballsRadius));
             }
 
             _enabled = true;

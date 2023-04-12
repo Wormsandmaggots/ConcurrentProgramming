@@ -1,4 +1,6 @@
 ﻿
+using Logic;
+
 namespace LogicTests
 {
     [TestClass]
@@ -7,6 +9,7 @@ namespace LogicTests
         private int _x, _y, _radius;
         private int _xBorder, _yBorder;
         private int _moveDistance;
+        private AbstractLogicApi _api;
 
         [TestInitialize]
         public void Initialize()
@@ -19,12 +22,14 @@ namespace LogicTests
 
             _xBorder = 640;
             _yBorder = 640;
+
+            _api = AbstractLogicApi.CreateApi();
         }
 
         [TestMethod]
         public void CreateBallTest()
         {
-            BallLogic b = new BallLogic(_x, _y, _radius);
+            BallLogic b = _api.CreateBall(_x, _y, _radius);
 
             Assert.IsNotNull(b);
             Assert.AreEqual(b.X, _x);
@@ -35,7 +40,7 @@ namespace LogicTests
         [TestMethod]
         public void ChangeBallLogicParametres()
         {
-            BallLogic b = new BallLogic(_x, _y, _radius);
+            BallLogic b = _api.CreateBall(_x, _y, _radius);
 
             b.X = 1;
             b.Y = 1;
@@ -47,9 +52,9 @@ namespace LogicTests
         [TestMethod]
         public void MoveBallTest()
         {
-            BallLogic b = new BallLogic(-5, -5, _radius);
+            BallLogic b = _api.CreateBall(_x, _y, _radius);
 
-            for(int i = 0; i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
                 b.MoveBallRandomly(_xBorder, _yBorder, _moveDistance);
 

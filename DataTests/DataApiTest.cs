@@ -18,7 +18,7 @@ namespace DataTests
         [TestMethod]
         public void CreateBallTest()
         {
-            Ball b = _dataApi.CreateBall(_x, _y, _radius);
+            IBall b = _dataApi.CreateBall(_x, _y, _radius);
 
             Assert.IsNotNull(b, null);
             Assert.AreEqual(b.X, _x);
@@ -29,7 +29,7 @@ namespace DataTests
         [TestMethod]
         public void ChangeBallParametres()
         {
-            Ball b = _dataApi.CreateBall(_x, _y, _radius);
+            IBall b = _dataApi.CreateBall(_x, _y, _radius);
 
             b.X = 1;
             b.Y = 1;
