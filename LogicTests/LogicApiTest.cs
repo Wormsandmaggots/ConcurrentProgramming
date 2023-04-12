@@ -21,7 +21,7 @@ namespace LogicTests
         [TestMethod]
         public void CreateBallLogicTest()
         {
-            BallLogic b = _logicApi.CreateBall(_x, _y, _radius);
+            IBallLogic b = _logicApi.CreateBall(_x, _y, _radius);
 
             Assert.IsNotNull(b);
             Assert.AreEqual(b.X, _x);

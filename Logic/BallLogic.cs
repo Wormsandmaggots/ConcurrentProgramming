@@ -3,7 +3,7 @@ using Data;
 
 namespace Logic
 {
-    public class BallLogic : INotifyPropertyChanged
+    internal class BallLogic : IBallLogic
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

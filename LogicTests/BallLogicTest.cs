@@ -29,7 +29,7 @@ namespace LogicTests
         [TestMethod]
         public void CreateBallTest()
         {
-            BallLogic b = _api.CreateBall(_x, _y, _radius);
+            IBallLogic b = _api.CreateBall(_x, _y, _radius);
 
             Assert.IsNotNull(b);
             Assert.AreEqual(b.X, _x);
@@ -40,7 +40,7 @@ namespace LogicTests
         [TestMethod]
         public void ChangeBallLogicParametres()
         {
-            BallLogic b = _api.CreateBall(_x, _y, _radius);
+            IBallLogic b = _api.CreateBall(_x, _y, _radius);
 
             b.X = 1;
             b.Y = 1;
@@ -52,7 +52,7 @@ namespace LogicTests
         [TestMethod]
         public void MoveBallTest()
         {
-            BallLogic b = _api.CreateBall(_x, _y, _radius);
+            IBallLogic b = _api.CreateBall(_x, _y, _radius);
 
             for (int i = 0; i < 10; i++)
             {

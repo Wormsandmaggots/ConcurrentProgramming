@@ -5,7 +5,7 @@ namespace Logic
     {
         private int _width;
         private int _height;
-        private List<BallLogic> _balls = new List<BallLogic>();
+        private List<IBallLogic> _balls = new List<IBallLogic>();
         private bool _enabled;
 
         public Scene(int width, int height)
@@ -35,7 +35,7 @@ namespace Logic
 
         public int Width => _width;
         public int Height => _height;
-        public List<BallLogic> Balls => _balls;
+        public List<IBallLogic> Balls => _balls;
         public bool Enabled
         {
             get { return _enabled; }
