@@ -20,6 +20,7 @@ namespace Model
 
         }
 
+        public abstract IBallModel CreateBall(IBallLogic ballLogic);
 
         public abstract void MakeScene(int ballsCount, int radius);
         public abstract void Enable();
@@ -28,14 +29,14 @@ namespace Model
 
         public abstract bool IsEnabled();
 
-        public abstract ObservableCollection<BallModel> GetAllBalls();
+        public abstract ObservableCollection<IBallModel> GetAllBalls();
 
         public sealed class ModelApi : AbstractModelApi
         {
             private AbstractLogicApi logicApi = AbstractLogicApi.CreateApi();
-            ObservableCollection<BallModel> balls = new ObservableCollection<BallModel>();
+            ObservableCollection<IBallModel> balls = new ObservableCollection<IBallModel>();
 
-            public ObservableCollection<BallModel> BallsListModel
+            public ObservableCollection<IBallModel> BallsListModel
             {
                 get
                 {
@@ -79,15 +80,21 @@ namespace Model
                 logicApi.CreateScene(520, 500, ballsCount, radius);
             }
 
-            public override ObservableCollection<BallModel> GetAllBalls()
+            public override ObservableCollection<IBallModel> GetAllBalls()
             {
-                List<BallLogic> ballslist = logicApi.GetBalls();
+                List<IBallLogic> ballslist = logicApi.GetBalls();
                 BallsListModel.Clear();
-                foreach (BallLogic ball in ballslist)
+                foreach (IBallLogic ball in ballslist)
                 {
                     BallsListModel.Add(new BallModel(ball));
                 }
                 return BallsListModel;
+            }
+
+            public override IBallModel CreateBall(IBallLogic ballLogic)
+            {
+                return new BallModel(ballLogic);
+
             }
         }
     }

@@ -4,11 +4,21 @@ using Logic;
 
 namespace Model
 {
-    public class BallModel : INotifyPropertyChanged
+    internal class BallModel : IBallModel
     {
         public int x;
         public int y;
         public int radius;
+
+
+
+        public int X { get { return x; } set { Console.WriteLine("settte"); } }
+        public int Y { get { return y; } set { Console.WriteLine("settte"); } }
+
+        public int Radius
+        {
+            get { return radius; }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -18,7 +28,7 @@ namespace Model
 
         }
 
-        public BallModel(BallLogic ball)
+        public BallModel(IBallLogic ball)
         {
             this.x = ball.X;
             this.y = ball.Y;
@@ -28,7 +38,7 @@ namespace Model
 
         public void Update (object source, PropertyChangedEventArgs eventCh)
         {
-            BallLogic toUpdateBall = (BallLogic)source;
+            IBallLogic toUpdateBall = (IBallLogic)source;
 
             if(eventCh.PropertyName == "X")
             {
@@ -67,5 +77,6 @@ namespace Model
             get { return radius; } //no setter cause it's hardocded
         }
 
+        
     }
 }

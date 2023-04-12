@@ -29,15 +29,17 @@ namespace ModelTest
         [TestMethod]
         public void MakeSceneTest()
         {
-            ObservableCollection<BallModel> balls = api.GetAllBalls();
+            ObservableCollection<IBallModel> balls = api.GetAllBalls();
             
             Assert.AreEqual(ballsCount, balls.Count);
             Assert.IsNotNull(balls);
-
-            foreach (BallModel ball in balls)
+            int counter = 0;
+            foreach (IBallModel ball in balls)
             {
                 Assert.IsNotNull(ball);
-                Assert.AreEqual(radius, ball.radius);
+                Assert.AreEqual(radius, ball.Radius);
+                Console.WriteLine(counter);
+                counter++;
             }
         }
 

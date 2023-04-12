@@ -50,9 +50,9 @@ namespace ViewModel
             set;
         }
 
-        private ObservableCollection<BallModel> ballList;
+        private ObservableCollection<IBallModel> ballList;
 
-        public ObservableCollection<BallModel> BallsListHandler
+        public ObservableCollection<IBallModel> BallsListHandler
         {
             get
             {
