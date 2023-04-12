@@ -10,16 +10,6 @@ namespace Model
         public int y;
         public int radius;
 
-
-
-        public int X { get { return x; } set { Console.WriteLine("settte"); } }
-        public int Y { get { return y; } set { Console.WriteLine("settte"); } }
-
-        public int Radius
-        {
-            get { return radius; }
-        }
-
         public event PropertyChangedEventHandler? PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

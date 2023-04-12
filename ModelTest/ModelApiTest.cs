@@ -37,7 +37,7 @@ namespace ModelTest
             foreach (IBallModel ball in balls)
             {
                 Assert.IsNotNull(ball);
-                Assert.AreEqual(radius, ball.Radius);
+                Assert.AreEqual(radius, ball.RadiusHandler);
                 Console.WriteLine(counter);
                 counter++;
             }

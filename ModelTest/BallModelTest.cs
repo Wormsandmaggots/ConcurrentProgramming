@@ -10,7 +10,8 @@ namespace BallModelTest
     {
         AbstractModelApi api;
         AbstractLogicApi logicApi;
-        IBallLogic ballLogic;
+        IBallLogic b;
+        IBallModel ballModel;
         public int radius;
         public int x;
         public int y;
@@ -19,37 +20,37 @@ namespace BallModelTest
 
         [TestInitialize]
         public void Initialize()
-        {
+        {   
             logicApi = AbstractLogicApi.CreateApi();
+            api = AbstractModelApi.CreateApi(logicApi);
             x = 5;
             y = 5;
             radius = 1;
 
-            ballLogic =  logicApi.CreateBall(x, y, radius);
-
+            b = logicApi.CreateBall(x, y, radius);
+            ballModel = api.CreateBall(b);
         }
 
         [TestMethod]
         public void CreateBallModelTest()
         {
-            IBallModel ballModel = api.CreateBall(ballLogic);
+            
 
-           // Assert.AreEqual(ballModel.Radius, ballLogic.Radius);
-           // Assert.AreEqual(ballModel.X, ballLogic.X);
-           // Assert.AreEqual(ballModel.Y, ballLogic.Y);
+            Assert.AreEqual(ballModel.RadiusHandler, b.Radius);
+            Assert.AreEqual(ballModel.XHandler, b.X);
+            Assert.AreEqual(ballModel.YHandler, b.Y);
             
         }
 
         [TestMethod]
         public void  ChangeValueModelTest()
         {
-            IBallModel ballModel = api.CreateBall(ballLogic);
 
-            ballModel.X = 1;
-            ballModel.Y = 2;
+            ballModel.XHandler = 1;
+            ballModel.YHandler = 2;
 
-            Assert.AreEqual(ballModel.X, 1);
-            Assert.AreEqual(ballModel.Y, 2);
+            Assert.AreEqual(ballModel.XHandler, 1);
+            Assert.AreEqual(ballModel.YHandler, 2);
         }
     }
 }

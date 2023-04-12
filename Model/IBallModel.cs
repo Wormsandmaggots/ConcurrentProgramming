@@ -10,9 +10,9 @@ namespace Model
 {
     public interface IBallModel : INotifyPropertyChanged
     {
-        abstract int X { get; set; }
-        abstract int Y { get; set; }
-        abstract int Radius { get; }
+        abstract int XHandler { get; set; }
+        abstract int YHandler { get; set; }
+        abstract int RadiusHandler { get; }
 
         event PropertyChangedEventHandler? PropertyChanged;
 
