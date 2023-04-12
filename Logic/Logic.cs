@@ -52,7 +52,7 @@ namespace Logic
             }
             public override BallLogic CreateBall(int x, int y, int radius)
             {
-                return new BallLogic(x, y, radius);
+                return new BallLogic(_dataApi.CreateBall(x,y,radius));
             }
 
             public override List<BallLogic> GetBalls()

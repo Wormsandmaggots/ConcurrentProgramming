@@ -2,12 +2,12 @@
 
 namespace Data
 {
-    public class Ball : INotifyPropertyChanged
+    internal class Ball : IBall
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private int _x, _y;
         private int _radius;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public Ball(int x, int y, int radius)
         {

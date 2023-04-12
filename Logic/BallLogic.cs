@@ -7,16 +7,16 @@ namespace Logic
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private Ball _ball;
+        private IBall _ball;
 
 
-        public BallLogic(int x, int y, int radius)
-        {
-            _ball = new Ball(x, y, radius);
-            _ball.PropertyChanged += Update;
-        }
+        //public BallLogic(int x, int y, int radius)
+        //{
+        //    _ball = new IBall(x, y, radius);
+        //    _ball.PropertyChanged += Update;
+        //}
 
-        public BallLogic(Ball ball)
+        public BallLogic(IBall ball)
         {
             _ball = ball;
             _ball.PropertyChanged += Update;

@@ -3,7 +3,7 @@ namespace Data
 {
     public abstract class AbstractDataApi
     {
-        public abstract Ball CreateBall(int x, int y, int radius);
+        public abstract IBall CreateBall(int x, int y, int radius);
 
         public static AbstractDataApi CreateDataApi()
         {
@@ -12,7 +12,7 @@ namespace Data
 
         internal sealed class DataApi : AbstractDataApi
         {
-            public override Ball CreateBall(int x, int y, int radius)
+            public override IBall CreateBall(int x, int y, int radius)
             {
                 return new Ball(x, y, radius);
             }
