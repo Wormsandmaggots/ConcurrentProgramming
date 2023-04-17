@@ -27,6 +27,7 @@ namespace BallModelTest
             y = 5;
             radius = 1;
 
+            
             b = logicApi.CreateBall(x, y, radius);
             ballModel = api.CreateBall(b);
         }

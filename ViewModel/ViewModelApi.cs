@@ -25,7 +25,14 @@ namespace ViewModel
 
         public void SetModelApi(AbstractModelApi api)
         {
-            this.modelApi = api;
+            if (api == null)
+            {
+                this.modelApi = AbstractModelApi.CreateApi();
+            }
+            else
+            {
+                this.modelApi = api;
+            }
         }
         public string BallCounterHandler
         {
