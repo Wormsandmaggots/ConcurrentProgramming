@@ -22,6 +22,11 @@ namespace ViewModel
         {
             return modelApi;
         }
+
+        public void SetModelApi(AbstractModelApi api)
+        {
+            this.modelApi = api;
+        }
         public string BallCounterHandler
         {
             get
@@ -95,21 +100,14 @@ namespace ViewModel
             isEnabled = false;
         }
 
-        public ViewModelApi() : this(null) { }
+        //public ViewModelApi() : this(null) { }
 
-        public ViewModelApi(AbstractModelApi api = null)
+        public ViewModelApi()
         {
             EnableSignal = new Signal(enable);
             DisableSignal = new Signal(disable);
 
-            if(api == null)
-            {
-                this.modelApi = AbstractModelApi.CreateApi();
-            }
-            else
-            {
-                this.modelApi = api;
-            }
+            this.modelApi = AbstractModelApi.CreateApi();
         }
 
         ~ ViewModelApi()

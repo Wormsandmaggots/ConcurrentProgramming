@@ -15,7 +15,8 @@ namespace ViewModelTest
         {
             abstractModelApi = AbstractModelApi.CreateApi();
 
-            api = new ViewModelApi(abstractModelApi);
+            api = new ViewModelApi();
+            api.SetModelApi(abstractModelApi);
 
 
         }

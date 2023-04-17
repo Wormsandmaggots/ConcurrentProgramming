@@ -22,7 +22,7 @@ namespace BallModelTest
         public void Initialize()
         {   
             logicApi = AbstractLogicApi.CreateApi();
-            api = AbstractModelApi.CreateApi(logicApi);
+            api = AbstractModelApi.CreateApi();
             x = 5;
             y = 5;
             radius = 1;

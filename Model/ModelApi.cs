@@ -6,18 +6,9 @@ namespace Model
     public abstract class AbstractModelApi
     {
 
-        public static AbstractModelApi CreateApi(AbstractLogicApi logicApi = null)
+        public static AbstractModelApi CreateApi()
         {   
-            if(logicApi == null)
-            {           
-                AbstractLogicApi api = AbstractLogicApi.CreateApi();
-                return new ModelApi(api);
-            }
-            else
-            {
-                return new ModelApi();
-            }
-
+            return new ModelApi();
         }
 
         public abstract IBallModel CreateBall(IBallLogic ballLogic);
@@ -48,16 +39,9 @@ namespace Model
                 }
             }
 
-            public ModelApi(AbstractLogicApi logicApi = null)
+            public ModelApi()
             {
-                if (logicApi == null)
-                {
                     this.logicApi = AbstractLogicApi.CreateApi();
-                }
-                else
-                {
-                    this.logicApi = logicApi;
-                }
             }
 
             public override void Disable()

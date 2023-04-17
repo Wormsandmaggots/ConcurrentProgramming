@@ -10,15 +10,13 @@ namespace ModelTest
         
         public int ballsCount;
         public int radius;
-        AbstractLogicApi logicApi;
         AbstractModelApi api;
 
 
         [TestInitialize] 
         public void Initialize() 
         {
-            logicApi = AbstractLogicApi.CreateApi();
-            api = AbstractModelApi.CreateApi(logicApi);
+            api = AbstractModelApi.CreateApi();
             radius = 1;
             ballsCount = 10;
 
