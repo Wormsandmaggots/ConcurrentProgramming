@@ -6,7 +6,7 @@ namespace Logic
     {
         public abstract void CreateScene(int width, int height, int ballsAmount, int radius);
 
-        public abstract IBallLogic CreateBall(int x, int y, int radius);
+        public abstract IBallLogic CreateBall(int x, int y, int radius, int width, int height);
         public abstract List<IBallLogic> GetBalls();
         public abstract void Enable();
         public abstract void Disable();
@@ -31,28 +31,10 @@ namespace Logic
             {
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
-
-                foreach (BallLogic ball in _scene.Balls)
-                {
-                    Task task = new Task(async () =>
-                    {
-                        while(true)
-                        {
-                            if (_scene.Enabled == false)
-                                continue;
-
-                            ball.MoveBallRandomly(_scene.Width, _scene.Height, 1);
-
-                            await Task.Delay(5);
-                        }
-                    });
-
-                    task.Start();
-                }
             }
-            public override IBallLogic CreateBall(int x, int y, int radius)
+            public override IBallLogic CreateBall(int x, int y, int radius, int width, int height)
             {
-                return new BallLogic(_dataApi.CreateBall(x,y,radius));
+                return new BallLogic(_dataApi.CreateBall(x,y,radius, width, height));
             }
 
             public override List<IBallLogic> GetBalls()

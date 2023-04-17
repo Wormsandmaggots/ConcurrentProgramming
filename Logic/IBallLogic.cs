@@ -17,5 +17,7 @@ namespace Logic
         event PropertyChangedEventHandler? PropertyChanged;
 
         abstract void MoveBallRandomly(int xBorder, int yBorder, int moveDistance);
+
+        abstract void ToggleBall(bool val);
     }
 }

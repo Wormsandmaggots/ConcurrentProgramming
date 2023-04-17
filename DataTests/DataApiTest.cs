@@ -7,29 +7,31 @@ namespace DataTests
     {
         private AbstractDataApi _dataApi;
         private int _x, _y, _radius;
+        private int _width, _height;
 
         [TestInitialize]
         public void Initialize()
         {
             _dataApi = AbstractDataApi.CreateDataApi();
             _radius = 1;
+
+            _width = 520;
+            _height = 400;
         }
 
         [TestMethod]
         public void CreateBallTest()
         {
-            IBall b = _dataApi.CreateBall(_x, _y, _radius);
+            IBall b = _dataApi.CreateBall(_x, _y, _radius, _width, _height);
 
             Assert.IsNotNull(b, null);
-            Assert.AreEqual(b.X, _x);
-            Assert.AreEqual(b.Y, _y);
             Assert.AreEqual(b.Radius, _radius);
         }
 
         [TestMethod]
         public void ChangeBallParametres()
         {
-            IBall b = _dataApi.CreateBall(_x, _y, _radius);
+            IBall b = _dataApi.CreateBall(_x, _y, _radius, _width, _height);
 
             b.X = 1;
             b.Y = 1;

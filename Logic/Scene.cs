@@ -27,10 +27,10 @@ namespace Logic
                 int x = r.Next(ballsRadius, _width - ballsRadius);
                 int y = r.Next(ballsRadius, _height - ballsRadius);
 
-                _balls.Add(api.CreateBall(x,y, ballsRadius));
+                _balls.Add(api.CreateBall(x,y, ballsRadius, _width, _height));
             }
 
-            _enabled = true;
+            Enabled = true;
         }
 
         public int Width => _width;
@@ -39,7 +39,16 @@ namespace Logic
         public bool Enabled
         {
             get { return _enabled; }
-            set { _enabled = value; }
+            set
+            {
+
+                _enabled = value;
+
+                foreach(IBallLogic b in _balls)
+                {
+                    b.ToggleBall(value);
+                }
+            }
         }
     }
 }

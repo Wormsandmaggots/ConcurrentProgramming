@@ -84,9 +84,16 @@ namespace Logic
             }
         }
 
+
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public void ToggleBall(bool val)
+        {
+            _ball.ToggleBall(val);
         }
 
         public int X

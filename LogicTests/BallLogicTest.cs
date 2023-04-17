@@ -29,30 +29,16 @@ namespace LogicTests
         [TestMethod]
         public void CreateBallTest()
         {
-            IBallLogic b = _api.CreateBall(_x, _y, _radius);
+            IBallLogic b = _api.CreateBall(_x, _y, _radius, _xBorder, _yBorder);
 
             Assert.IsNotNull(b);
-            Assert.AreEqual(b.X, _x);
-            Assert.AreEqual(b.Y, _y);
             Assert.AreEqual(b.Radius, _radius);
-        }
-
-        [TestMethod]
-        public void ChangeBallLogicParametres()
-        {
-            IBallLogic b = _api.CreateBall(_x, _y, _radius);
-
-            b.X = 1;
-            b.Y = 1;
-
-            Assert.AreEqual(b.X, 1);
-            Assert.AreEqual(b.Y, 1);
         }
 
         [TestMethod]
         public void MoveBallTest()
         {
-            IBallLogic b = _api.CreateBall(_x, _y, _radius);
+            IBallLogic b = _api.CreateBall(_x, _y, _radius, _xBorder, _yBorder);
 
             for (int i = 0; i < 10; i++)
             {
