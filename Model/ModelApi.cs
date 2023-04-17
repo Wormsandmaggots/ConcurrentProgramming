@@ -77,9 +77,10 @@ namespace Model
 
             public override IBallModel CreateBall(IBallLogic ballLogic)
             {
-               // if(ballLogic == null)
+                //if(ballLogic == null)
                // {
-                //    return new BallModel(new IBallLogic);
+                   
+               //     return new BallModel(AbstractLogicApi.CreateApi().CreateBall());
                // }
                 return new BallModel(ballLogic);
 

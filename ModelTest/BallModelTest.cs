@@ -9,7 +9,7 @@ namespace BallModelTest
     public class ModelApiTest
     {
         AbstractModelApi api;
-        AbstractLogicApi logicApi;
+        //AbstractLogicApi logicApi;
         IBallLogic b;
         IBallModel ballModel;
         public int radius;
@@ -22,8 +22,9 @@ namespace BallModelTest
         [TestInitialize]
         public void Initialize()
         {
-            logicApi = AbstractLogicApi.CreateApi();
+            //logicApi = AbstractLogicApi.CreateApi();
             api = AbstractModelApi.CreateApi();
+           
             x = 5;
             y = 5;
             radius = 1;
@@ -31,8 +32,8 @@ namespace BallModelTest
             width = 640;
             height = 640;
 
-            b = logicApi.CreateBall(x, y, radius, width, height);
-            ballModel = api.CreateBall(b);
+           // b = logicApi.CreateBall(x, y, radius, width, height);
+           // ballModel = api.CreateBall(b);
         }
 
     }
