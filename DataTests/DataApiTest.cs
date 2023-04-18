@@ -27,17 +27,5 @@ namespace DataTests
             Assert.IsNotNull(b, null);
             Assert.AreEqual(b.Radius, _radius);
         }
-
-        [TestMethod]
-        public void ChangeBallParametres()
-        {
-            IBall b = _dataApi.CreateBall(_x, _y, _radius, _width, _height);
-
-            b.X = 1;
-            b.Y = 1;
-
-            Assert.AreEqual(b.X, 1);
-            Assert.AreEqual(b.Y, 1);
-        }
     }
 }

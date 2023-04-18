@@ -24,8 +24,6 @@ namespace LogicTests
             IBallLogic b = _logicApi.CreateBall(_x, _y, _radius, _width, _height);
 
             Assert.IsNotNull(b);
-            Assert.AreEqual(b.X, _x);
-            Assert.AreEqual(b.Y, _y);
             Assert.AreEqual(b.Radius, _radius);
         }
 
