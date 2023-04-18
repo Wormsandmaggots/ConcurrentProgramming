@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace Model
 {
-    public interface IBallModel : INotifyPropertyChanged
+    public interface IBallModel : INotifyPropertyChanged, IDisposable
     {
         abstract int XHandler { get; set; }
         abstract int YHandler { get; set; }

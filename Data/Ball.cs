@@ -25,7 +25,7 @@ namespace Data
 
                     await Task.Delay(5);
 
-                    if (_canMove == false) break;
+                    if (_canMove == false) return;
                 }
             });
 
@@ -86,7 +86,7 @@ namespace Data
             _canMove = val;
         }
 
-        ~Ball()
+        public void Dispose()
         {
             _move.Dispose();
         }

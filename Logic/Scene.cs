@@ -16,6 +16,11 @@ namespace Logic
 
         public void GenerateBallsList(int ballsAmount, int ballsRadius)
         {
+            foreach(IBallLogic ball in _balls)
+            {
+                ball.Dispose();
+            }
+
             _balls.Clear();
 
             Random r = new Random();

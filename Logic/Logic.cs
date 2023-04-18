@@ -29,6 +29,14 @@ namespace Logic
 
             public override void CreateScene(int width, int height, int ballsAmount, int radius)
             {
+                if(_scene != null)
+                {
+                    foreach (IBallLogic ballLogic in GetBalls())
+                    {
+                        ballLogic.Dispose();
+                    }
+                }
+
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
             }

@@ -2,7 +2,7 @@
 
 namespace Logic
 {
-    public interface IBallLogic : INotifyPropertyChanged
+    public interface IBallLogic : INotifyPropertyChanged, IDisposable
     {
         abstract int X { get; set; }
         abstract int Y { get; set; }

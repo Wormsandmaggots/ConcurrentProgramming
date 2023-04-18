@@ -2,7 +2,7 @@
 
 namespace Data
 {
-    public interface IBall : INotifyPropertyChanged
+    public interface IBall : INotifyPropertyChanged, IDisposable
     {
         abstract int X { get; set; }
         abstract int Y { get; set; }

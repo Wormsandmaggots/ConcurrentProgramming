@@ -41,9 +41,9 @@ namespace Model
 
         }
 
-        ~BallModel()
+        public void Dispose()
         {
-            PropertyChanged = null;
+            PropertyChanged = (PropertyChangedEventHandler)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
         }
 
         public int XHandler

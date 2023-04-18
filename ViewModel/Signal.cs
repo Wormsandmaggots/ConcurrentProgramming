@@ -19,7 +19,7 @@ namespace ViewModel
         {
             execute = (Action)Delegate.RemoveAll(execute, execute);
             canExecute = (Func<bool>)Delegate.RemoveAll(canExecute, canExecute);
-            CanExecuteChanged = null;
+            CanExecuteChanged = (EventHandler)Delegate.RemoveAll(CanExecuteChanged, CanExecuteChanged);
         }
 
         public void Execute(object name)

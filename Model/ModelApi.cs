@@ -7,7 +7,7 @@ namespace Model
     {
 
         public static AbstractModelApi CreateApi()
-        {   
+        {
             return new ModelApi();
         }
 
@@ -67,6 +67,12 @@ namespace Model
             public override ObservableCollection<IBallModel> GetAllBalls()
             {
                 List<IBallLogic> ballslist = logicApi.GetBalls();
+
+                foreach(IBallModel ballModel in BallsListModel)
+                {
+                    ballModel.Dispose();
+                }
+
                 BallsListModel.Clear();
                 foreach (IBallLogic ball in ballslist)
                 {
@@ -79,7 +85,7 @@ namespace Model
             {
                 //if(ballLogic == null)
                // {
-                   
+
                //     return new BallModel(AbstractLogicApi.CreateApi().CreateBall());
                // }
                 return new BallModel(ballLogic);

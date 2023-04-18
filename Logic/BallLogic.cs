@@ -9,23 +9,10 @@ namespace Logic
 
         private IBall _ball;
 
-
-        //public BallLogic(int x, int y, int radius)
-        //{
-        //    _ball = new IBall(x, y, radius);
-        //    _ball.PropertyChanged += Update;
-        //}
-
         public BallLogic(IBall ball)
         {
             _ball = ball;
             _ball.PropertyChanged += Update;
-        }
-
-        ~BallLogic()
-        {
-            PropertyChanged = null;
-            _ball.PropertyChanged -= Update;
         }
 
         private void Update(object source, PropertyChangedEventArgs e)
@@ -48,6 +35,13 @@ namespace Logic
         public void ToggleBall(bool val)
         {
             _ball.ToggleBall(val);
+        }
+
+        public void Dispose()
+        {
+            _ball.PropertyChanged -= Update;
+            PropertyChanged = (PropertyChangedEventHandler)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
+            _ball.Dispose();
         }
 
         public int X
