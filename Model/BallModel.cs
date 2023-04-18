@@ -41,6 +41,10 @@ namespace Model
 
         }
 
+        ~BallModel()
+        {
+            PropertyChanged = null;
+        }
 
         public int XHandler
         {
@@ -67,6 +71,6 @@ namespace Model
             get { return radius; } //no setter cause it's hardocded
         }
 
-        
+
     }
 }

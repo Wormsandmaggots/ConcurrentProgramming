@@ -7,6 +7,7 @@ namespace Data
         private int _x, _y;
         private int _radius;
         private bool _canMove;
+        private Task _move;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -16,7 +17,7 @@ namespace Data
             _y = y;
             _radius = radius;
 
-            Task task = new Task(async () =>
+            _move = new Task(async () =>
             {
                 while (true)
                 {
@@ -28,7 +29,7 @@ namespace Data
                 }
             });
 
-            task.Start();
+            _move.Start();
         }
 
         public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
@@ -83,6 +84,11 @@ namespace Data
         public void ToggleBall(bool val)
         {
             _canMove = val;
+        }
+
+        ~Ball()
+        {
+            _move.Dispose();
         }
 
         public int X
