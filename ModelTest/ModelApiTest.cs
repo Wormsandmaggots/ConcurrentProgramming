@@ -1,4 +1,3 @@
-using Logic;
 using Model;
 using System.Collections.ObjectModel;
 
@@ -7,14 +6,14 @@ namespace ModelTest
     [TestClass]
     public class ModelApiTest
     {
-        
+
         public int ballsCount;
         public int radius;
         AbstractModelApi api;
 
 
-        [TestInitialize] 
-        public void Initialize() 
+        [TestInitialize]
+        public void Initialize()
         {
             api = AbstractModelApi.CreateApi();
             radius = 1;
@@ -28,7 +27,7 @@ namespace ModelTest
         public void MakeSceneTest()
         {
             ObservableCollection<IBallModel> balls = api.GetAllBalls();
-            
+
             Assert.AreEqual(ballsCount, balls.Count);
             Assert.IsNotNull(balls);
             int counter = 0;

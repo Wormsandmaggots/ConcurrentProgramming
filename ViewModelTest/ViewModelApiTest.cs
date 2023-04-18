@@ -1,4 +1,3 @@
-using Model;
 using ViewModel;
 
 namespace ViewModelTest
@@ -16,7 +15,7 @@ namespace ViewModelTest
             //abstractModelApi = AbstractModelApi.CreateApi();
 
             api = new ViewModelApi();
-           
+
             api.SetModelApi(null);
 
 

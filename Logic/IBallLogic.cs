@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Logic
 {
@@ -15,9 +9,6 @@ namespace Logic
         abstract int Radius { get; }
 
         event PropertyChangedEventHandler? PropertyChanged;
-
-        abstract void MoveBallRandomly(int xBorder, int yBorder, int moveDistance);
-
         abstract void ToggleBall(bool val);
     }
 }

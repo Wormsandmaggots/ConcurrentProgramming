@@ -40,52 +40,6 @@ namespace Logic
             }
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
-        {
-            Random r = new Random();
-
-            int x = r.Next(-1, 2);
-            int y;
-
-            do
-            {
-                y = r.Next(-1, 2);
-
-            } while (x == 0 && y == 0);
-
-            x *= moveDistance;
-            y *= moveDistance;
-
-            if (X + x + Radius > xBorder)
-            {
-                X = xBorder - Radius;
-            }
-            else if (X + x - Radius < 0)
-            {
-                X = Radius;
-            }
-            else
-            {
-                X = X + x;
-            }
-
-
-            if (Y + y + Radius > yBorder)
-            {
-                Y = yBorder - Radius;
-            }
-            else if (Y + y - Radius < 0)
-            {
-                Y = Radius;
-            }
-            else
-            {
-                Y = Y + y;
-            }
-        }
-
-
-
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
