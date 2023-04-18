@@ -7,7 +7,6 @@ namespace Data
         private int _x, _y;
         private int _radius;
         private bool _canMove;
-        private Task _move;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -17,7 +16,21 @@ namespace Data
             _y = y;
             _radius = radius;
 
-            _move = new Task(async () =>
+            //_move = new Task(async () =>
+            //{
+            //    while (true)
+            //    {
+            //        MoveBallRandomly(width, height, 1);
+
+            //        await Task.Delay(5);
+
+            //        if (_canMove == false) return;
+            //    }
+            //});
+
+            //_move.Start();
+
+            var move = async void (Object state) =>
             {
                 while (true)
                 {
@@ -27,9 +40,9 @@ namespace Data
 
                     if (_canMove == false) return;
                 }
-            });
+            };
 
-            _move.Start();
+            ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
         public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
@@ -88,7 +101,7 @@ namespace Data
 
         public void Dispose()
         {
-            _move.Dispose();
+            //_move.Dispose();
         }
 
         public int X
