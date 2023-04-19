@@ -26,19 +26,12 @@ namespace Model
             ball.PropertyChanged += Update;
         }
 
-        public void Update (object source, PropertyChangedEventArgs eventCh)
+        public void Update (object source)
         {
             IBallLogic toUpdateBall = (IBallLogic)source;
 
-            if(eventCh.PropertyName == "X")
-            {
-                this.XHandler = toUpdateBall.X;
-            }
-            else if(eventCh.PropertyName == "Y")
-            {
-                this.YHandler = toUpdateBall.Y;
-            }
-
+            this.XHandler = toUpdateBall.X;
+            this.YHandler = toUpdateBall.Y;
         }
 
         public void Dispose()

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Data
+﻿namespace Data
 {
     internal class Ball : IBall
     {
@@ -8,7 +6,7 @@ namespace Data
         private int _radius;
         private bool _canMove;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event Action<Object> PropertyChanged;
 
         public Ball(int x, int y, int radius, int width, int height)
         {
@@ -30,7 +28,7 @@ namespace Data
 
             //_move.Start();
 
-            var move = async void (Object state) =>
+            Action<Object> move = async void (Object state) =>
             {
                 while (true)
                 {
@@ -89,9 +87,9 @@ namespace Data
             }
         }
 
-        public void OnPropertyChanged(string propertyName)
+        public void OnPropertyChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this);
         }
 
         public void ToggleBall(bool val)
@@ -110,7 +108,7 @@ namespace Data
             set
             {
                 _x = value;
-                OnPropertyChanged("X");
+                OnPropertyChanged();
             }
         }
 
@@ -120,7 +118,7 @@ namespace Data
             set
             {
                 _y = value;
-                OnPropertyChanged("Y");
+                OnPropertyChanged();
             }
         }
 

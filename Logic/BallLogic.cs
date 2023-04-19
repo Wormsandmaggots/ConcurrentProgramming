@@ -1,11 +1,10 @@
-﻿using System.ComponentModel;
-using Data;
+﻿using Data;
 
 namespace Logic
 {
     internal class BallLogic : IBallLogic
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event Action<Object> PropertyChanged;
 
         private IBall _ball;
 
@@ -15,21 +14,14 @@ namespace Logic
             _ball.PropertyChanged += Update;
         }
 
-        private void Update(object source, PropertyChangedEventArgs e)
+        private void Update(object source)
         {
-            if (e.PropertyName == "X")
-            {
-                OnPropertyChanged("X");
-            }
-            else if (e.PropertyName == "Y")
-            {
-                OnPropertyChanged("Y");
-            }
+            OnPropertyChanged();
         }
 
-        private void OnPropertyChanged(string propertyName)
+        private void OnPropertyChanged()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this);
         }
 
         public void ToggleBall(bool val)
@@ -40,7 +32,7 @@ namespace Logic
         public void Dispose()
         {
             _ball.PropertyChanged -= Update;
-            PropertyChanged = (PropertyChangedEventHandler)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
+            PropertyChanged = (Action<Object>)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
             _ball.Dispose();
         }
 

@@ -1,5 +1,4 @@
-﻿
-namespace Data
+﻿namespace Data
 {
     public abstract class AbstractDataApi
     {
