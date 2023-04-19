@@ -6,7 +6,7 @@
         private int _radius;
         private bool _canMove;
 
-        public event Action<Object> PropertyChanged;
+        public event Action PropertyChanged;
 
         public Ball(int x, int y, int radius, int width, int height)
         {
@@ -89,7 +89,7 @@
 
         public void OnPropertyChanged()
         {
-            PropertyChanged?.Invoke(this);
+            PropertyChanged?.Invoke();
         }
 
         public void ToggleBall(bool val)

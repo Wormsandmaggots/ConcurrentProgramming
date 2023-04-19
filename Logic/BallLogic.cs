@@ -14,7 +14,7 @@ namespace Logic
             _ball.PropertyChanged += Update;
         }
 
-        private void Update(object source)
+        private void Update()
         {
             OnPropertyChanged();
         }

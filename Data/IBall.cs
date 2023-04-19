@@ -6,7 +6,7 @@
         abstract int Y { get; set; }
         abstract int Radius { get; }
 
-        event Action<Object> PropertyChanged;
+        event Action PropertyChanged;
 
         abstract void MoveBallRandomly(int xBorder, int yBorder, int moveDistance);
 
