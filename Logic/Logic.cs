@@ -41,10 +41,10 @@ namespace Logic
 
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
-              //  foreach (IBallLogic ballLogic in GetBalls())
-                //{
-               //     ballLogic.PropertyChanged += Update;
-              //  }
+              foreach (IBallLogic ballLogic in GetBalls())
+                {
+               //    ballLogic.PropertyChanged += Update;
+                }
 
             }
             public override IBallLogic CreateBall(int x, int y, int radius, int width, int height)
@@ -73,16 +73,15 @@ namespace Logic
             }
 
 
-          /*  private void Update(object sender, PropertyChangedEventArgs ev)
+         /*  private void Update(object sender)
             {
                 IBallLogic ballLogic = (IBallLogic)sender;
-                if (ev.PropertyName == "Position")
+                if (.PropertyName == "Position")
                 {
                     // CheckCollision(orb);
                 }
 
-            }
-          */
+            }*/
 
 
             private void BorderCollision (IBallLogic ballLogic)

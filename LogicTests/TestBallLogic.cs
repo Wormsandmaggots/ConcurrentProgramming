@@ -36,7 +36,7 @@ namespace LogicTests
             _ball.Dispose();
         }
 
-        public int X
+        public double X
         {
             get { return _ball.X; }
             set
@@ -45,7 +45,7 @@ namespace LogicTests
             }
         }
 
-        public int Y
+        public double Y
         {
             get { return _ball.Y; }
             set
@@ -58,5 +58,10 @@ namespace LogicTests
         {
             get { return _ball.Radius; }
         }
+
+        double IBallLogic.X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IBallLogic.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

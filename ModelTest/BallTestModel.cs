@@ -8,8 +8,8 @@ namespace ModelTest
 {
     internal class BallTestModel : IBallModel
     {
-        public int x;
-        public int y;
+        public double x;
+        public double y;
         public int radius;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -41,7 +41,7 @@ namespace ModelTest
             PropertyChanged = (PropertyChangedEventHandler)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
         }
 
-        public int XHandler
+        public double XHandler
         {
             get { return x; }
             set
@@ -51,7 +51,7 @@ namespace ModelTest
             }
         }
 
-        public int YHandler
+        public double YHandler
         {
             get { return y; }
             set
@@ -66,5 +66,7 @@ namespace ModelTest
             get { return radius; } //no setter cause it's hardocded
         }
 
+        double IBallModel.XHandler { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IBallModel.YHandler { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

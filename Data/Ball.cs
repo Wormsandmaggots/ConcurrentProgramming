@@ -19,8 +19,9 @@ namespace Data
             _radius = radius;
             Random random = new Random();
             _weight = 1;
-            double yVelocity = random.NextDouble()*0.99;
-            double xVelocity = random.NextDouble()*0.99;
+            double yVelocity = random.NextDouble();
+            double xVelocity = random.NextDouble();
+            xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
             this._velocity[0] = xVelocity;
             this._velocity[1] = yVelocity;
@@ -57,8 +58,6 @@ namespace Data
 
         public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
         {
-            Random r = new Random();
-
               double x = this._x;
               double y = this._y;
 
@@ -71,11 +70,11 @@ namespace Data
               x += xVelocity;
               y += yVelocity;
 
-              if (X + x + Radius > xBorder)
+              if (x + Radius > xBorder)
               {
                   X = xBorder - Radius;
               }
-              else if (X + x - Radius < 0)
+              else if (x - Radius < 0)
               {
                   X = Radius;
               }
@@ -85,11 +84,11 @@ namespace Data
               }
 
 
-              if (Y + y + Radius > yBorder)
+              if (y + Radius > yBorder)
               {
                   Y = yBorder - Radius;
               }
-              else if (Y + y - Radius < 0)
+              else if (y - Radius < 0)
               {
                   Y = Radius;
               }

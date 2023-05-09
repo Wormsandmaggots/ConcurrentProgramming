@@ -104,6 +104,11 @@ namespace DataTests
             //_move.Dispose();
         }
 
+        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
+        {
+            throw new NotImplementedException();
+        }
+
         public int X
         {
             get { return _x; }
@@ -125,5 +130,10 @@ namespace DataTests
         }
 
         public int Radius => _radius;
+
+        double IBall.X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IBall.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }
