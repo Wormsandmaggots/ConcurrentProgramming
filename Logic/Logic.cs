@@ -144,18 +144,6 @@ namespace Logic
                     {
                         ballLogic.SetCanCollide(false);
                         checkedBall.SetCanCollide(false);
-                        /*lock (this) {
-                            double newVelocityX = ((checkedBall.XVelocity * (checkedBall.Weight - ballLogic.Weight) + (ballLogic.Weight * ballLogic.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
-                            ballLogic.XVelocity = ((ballLogic.XVelocity * (ballLogic.Weight - checkedBall.Weight) + (checkedBall.Weight * checkedBall.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
-                            checkedBall.XVelocity = newVelocityX;
-
-                            double newVelocityY = ((checkedBall.YVelocity * (checkedBall.Weight - ballLogic.Weight)) + (ballLogic.Weight * ballLogic.YVelocity * 2) / (checkedBall.Weight + ballLogic.Weight));
-                            ballLogic.YVelocity = ((ballLogic.YVelocity * (ballLogic.Weight - checkedBall.Weight)) + (checkedBall.Weight * checkedBall.YVelocity * 2) / (checkedBall.Weight + ballLogic.Weight));
-                            checkedBall.YVelocity = newVelocityY;
-
-                        } */
-
-                        // barrier.SignalAndWait();
 
                         lock (this)
                         {
@@ -172,7 +160,7 @@ namespace Logic
                         Action<Object> a = async (Object) =>
                         {
                             
-                            await Task.Delay(100);
+                            await Task.Delay(80);
                             ballLogic.SetCanCollide(true);
                             checkedBall.SetCanCollide(true);
                         };

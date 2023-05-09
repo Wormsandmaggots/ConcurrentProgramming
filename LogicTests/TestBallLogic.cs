@@ -36,6 +36,16 @@ namespace LogicTests
             _ball.Dispose();
         }
 
+        public bool CanCollide()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetCanCollide(bool canCollide)
+        {
+            throw new NotImplementedException();
+        }
+
         public double X
         {
             get { return _ball.X; }
@@ -63,5 +73,7 @@ namespace LogicTests
         double IBallLogic.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int Weight => throw new NotImplementedException();
     }
 }

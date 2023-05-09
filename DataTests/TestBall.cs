@@ -135,5 +135,7 @@ namespace DataTests
         double IBall.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public int Weight => throw new NotImplementedException();
     }
 }

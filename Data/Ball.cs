@@ -6,7 +6,7 @@ namespace Data
     {
         private double _x, _y;
         private int _radius;
-        private int _weight; //TODO:: w razie czego zmienić na double
+        private int _weight;
         private double[] _velocity = new double[2];
         private bool _canMove = true;
 
@@ -19,26 +19,13 @@ namespace Data
             _radius = radius;
             Random random = new Random();
             _weight = 1;
-            double yVelocity = random.NextDouble() * 4;
-            double xVelocity = random.NextDouble() * 4;
+            double yVelocity = random.NextDouble() * 4.5;
+            double xVelocity = random.NextDouble() * 4.5;
             xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
             this._velocity[0] = xVelocity;
             this._velocity[1] = yVelocity;
 
-            //_move = new Task(async () =>
-            //{
-            //    while (true)
-            //    {
-            //        MoveBallRandomly(width, height, 1);
-
-            //        await Task.Delay(5);
-
-            //        if (_canMove == false) return;
-            //    }
-            //});
-
-            //_move.Start();
 
             Action<Object> move = async void (Object state) =>
             {
@@ -64,44 +51,11 @@ namespace Data
               double x = this._x;
               double y = this._y;
 
-             /* do
-              {
-                  y = r.Next(-1, 2);
-
-              } while (x == 0 && y == 0);*/
-
               x += xVelocity;
               y += yVelocity;
 
             X = x;
             Y = y;
-
-/*              if (x + Radius > xBorder)
-              {
-                  X = xBorder - Radius;
-              }
-              else if (x - Radius < 0)
-              {
-                  X = Radius;
-              }
-              else
-              {
-                  X = x;
-              }
-
-
-              if (y + Radius > yBorder)
-              {
-                  Y = yBorder - Radius;
-              }
-              else if (y - Radius < 0)
-              {
-                  Y = Radius;
-              }
-              else
-              {
-                  Y = y;
-              }*/
         }
 
         public void OnPropertyChanged()
