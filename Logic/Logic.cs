@@ -43,7 +43,7 @@ namespace Logic
                 _scene.GenerateBallsList(ballsAmount, radius);
               foreach (IBallLogic ballLogic in GetBalls())
                 {
-                    ballLogic.PropertyChanged += Update;
+                    ballLogic.PropertyChanged += Update2;
                 }
 
             }
@@ -73,19 +73,45 @@ namespace Logic
             }
 
 
-           private void Update(object sender)
+           private void Update2(object sender)
             {
                 IBallLogic ballLogic = (IBallLogic)sender;
                 CheckCollision(ballLogic);
-
             }
 
             private void CheckCollision(IBallLogic ball)
             {
-                BorderCollision(ball);
-
+                BorderCollision2(ball);
             }
 
+            private void BorderCollision2(IBallLogic ball)
+            {
+                lock(ball)
+                {
+                    if (ball.X + ball.Radius > _scene.Width)
+                    {
+                        ball.XVelocity = -ball.XVelocity;
+                        ball.X = _scene.Width - ball.Radius;
+                    }
+                    else if (ball.X - ball.Radius < 0)
+                    {
+                        ball.XVelocity = -ball.XVelocity;
+                        ball.X = ball.Radius;
+                    }
+
+
+                    if (ball.Y + ball.Radius > _scene.Height)
+                    {
+                        ball.YVelocity = -ball.YVelocity;
+                        ball.Y = _scene.Height - ball.Radius;
+                    }
+                    else if (ball.Y - ball.Radius < 0)
+                    {
+                        ball.YVelocity = -ball.YVelocity;
+                        ball.Y = ball.Radius;
+                    }
+                }
+            }
 
             private void BorderCollision (IBallLogic ballLogic)
             {

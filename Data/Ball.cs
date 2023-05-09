@@ -8,7 +8,7 @@ namespace Data
         private int _radius;
         private int _weight; //TODO:: w razie czego zmienić na double
         private double[] _velocity = new double[2];
-        private bool _canMove;
+        private bool _canMove = true;
 
         public event Action PropertyChanged;
 
@@ -44,7 +44,10 @@ namespace Data
             {
                 while (true)
                 {
-                    MoveBallRandomly(width, height, xVelocity, yVelocity);
+                    lock(this)
+                    {
+                        MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+                    }
 
                     await Task.Delay(5);
 
@@ -67,10 +70,10 @@ namespace Data
 
               } while (x == 0 && y == 0);*/
 
-              x += xVelocity;
-              y += yVelocity;
+              X += xVelocity;
+              Y += yVelocity;
 
-              if (x + Radius > xBorder)
+/*              if (x + Radius > xBorder)
               {
                   X = xBorder - Radius;
               }
@@ -95,7 +98,7 @@ namespace Data
               else
               {
                   Y = y;
-              }
+              }*/
         }
 
         public void OnPropertyChanged()
@@ -148,7 +151,7 @@ namespace Data
             get { return _velocity[1]; }
             set
             {
-                _velocity[2] = value;
+                _velocity[1] = value;
             }
         }
 
