@@ -5,6 +5,7 @@ namespace LogicTests
     internal class TestBallLogic : IBallLogic
     {
         public event Action<Object> PropertyChanged;
+        private bool _canCollide = true;
 
         private IBall _ball;
 
@@ -38,13 +39,15 @@ namespace LogicTests
 
         public bool CanCollide()
         {
-            throw new NotImplementedException();
+            return _canCollide;
         }
 
         public void SetCanCollide(bool canCollide)
         {
-            throw new NotImplementedException();
+            _canCollide = canCollide;
         }
+
+
 
         public double X
         {
@@ -52,6 +55,8 @@ namespace LogicTests
             set
             {
                 _ball.X = value;
+                OnPropertyChanged();
+
             }
         }
 
@@ -61,6 +66,27 @@ namespace LogicTests
             set
             {
                 _ball.Y = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double XVelocity
+        {
+            get { return _ball.XVelocity; }
+            set
+            {
+
+                _ball.XVelocity = value;
+
+            }
+        }
+
+        public double YVelocity
+        {
+            get { return _ball.YVelocity; }
+            set
+            {
+                _ball.YVelocity = value;
             }
         }
 
@@ -69,11 +95,9 @@ namespace LogicTests
             get { return _ball.Radius; }
         }
 
-        double IBallLogic.X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        double IBallLogic.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int Weight => throw new NotImplementedException();
+        public int Weight
+        {
+            get { return _ball.Weight; }
+        }
     }
 }

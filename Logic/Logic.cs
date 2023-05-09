@@ -24,9 +24,6 @@ namespace Logic
 
             private IScene _scene;
 
-            public static Barrier barrier = new Barrier(2);
-
-
             public LogicApi()
             {
                 _dataApi = AbstractDataApi.CreateDataApi();

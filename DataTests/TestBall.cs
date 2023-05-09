@@ -4,9 +4,11 @@ namespace DataTests
 {
     internal class TestBall : IBall
     {
-        private int _x, _y;
+        private double _x, _y;
         private int _radius;
-        private bool _canMove;
+        private int _weight;
+        private double[] _velocity = new double[2];
+        private bool _canMove = true;
 
         public event Action PropertyChanged;
 
@@ -15,26 +17,24 @@ namespace DataTests
             _x = x;
             _y = y;
             _radius = radius;
+            Random random = new Random();
+            _weight = 1;
+            double yVelocity = random.NextDouble() * 4.5;
+            double xVelocity = random.NextDouble() * 4.5;
+            xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
+            yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
+            this._velocity[0] = xVelocity;
+            this._velocity[1] = yVelocity;
 
-            //_move = new Task(async () =>
-            //{
-            //    while (true)
-            //    {
-            //        MoveBallRandomly(width, height, 1);
-
-            //        await Task.Delay(5);
-
-            //        if (_canMove == false) return;
-            //    }
-            //});
-
-            //_move.Start();
 
             Action<Object> move = async void (Object state) =>
             {
                 while (true)
                 {
-                    MoveBallRandomly(width, height, 1);
+                    lock (this)
+                    {
+                        MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+                    }
 
                     await Task.Delay(5);
 
@@ -42,51 +42,20 @@ namespace DataTests
                 }
             };
 
+
             ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
+        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
         {
-            Random r = new Random();
+            double x = this._x;
+            double y = this._y;
 
-            int x = r.Next(-1, 2);
-            int y;
+            x += xVelocity;
+            y += yVelocity;
 
-            do
-            {
-                y = r.Next(-1, 2);
-
-            } while (x == 0 && y == 0);
-
-            x *= moveDistance;
-            y *= moveDistance;
-
-            if (X + x + Radius > xBorder)
-            {
-                X = xBorder - Radius;
-            }
-            else if (X + x - Radius < 0)
-            {
-                X = Radius;
-            }
-            else
-            {
-                X = X + x;
-            }
-
-
-            if (Y + y + Radius > yBorder)
-            {
-                Y = yBorder - Radius;
-            }
-            else if (Y + y - Radius < 0)
-            {
-                Y = Radius;
-            }
-            else
-            {
-                Y = Y + y;
-            }
+            X = x;
+            Y = y;
         }
 
         public void OnPropertyChanged()
@@ -104,12 +73,7 @@ namespace DataTests
             //_move.Dispose();
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int X
+        public double X
         {
             get { return _x; }
             set
@@ -119,23 +83,37 @@ namespace DataTests
             }
         }
 
-        public int Y
+        public double Y
         {
             get { return _y; }
             set
             {
                 _y = value;
                 OnPropertyChanged();
+
+            }
+        }
+
+        public double XVelocity
+        {
+            get { return _velocity[0]; }
+            set
+            {
+                _velocity[0] = value;
+            }
+        }
+
+        public double YVelocity
+        {
+            get { return _velocity[1]; }
+            set
+            {
+                _velocity[1] = value;
             }
         }
 
         public int Radius => _radius;
 
-        double IBall.X { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        double IBall.Y { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double XVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double YVelocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public int Weight => throw new NotImplementedException();
+        public int Weight => _weight;
     }
 }
