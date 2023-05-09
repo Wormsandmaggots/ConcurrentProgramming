@@ -70,8 +70,11 @@ namespace Data
 
               } while (x == 0 && y == 0);*/
 
-              X += xVelocity;
-              Y += yVelocity;
+              x += xVelocity;
+              y += yVelocity;
+
+            X = x;
+            Y = y;
 
 /*              if (x + Radius > xBorder)
               {

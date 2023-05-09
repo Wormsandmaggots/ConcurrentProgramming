@@ -5,6 +5,7 @@ namespace Logic
     internal class BallLogic : IBallLogic
     {
         public event Action<Object> PropertyChanged;
+        private bool _canCollide = true;
 
         private IBall _ball;
 
@@ -36,6 +37,18 @@ namespace Logic
             _ball.Dispose();
         }
 
+        public bool CanCollide()
+        {
+            return _canCollide;
+        }
+
+        public void SetCanCollide(bool canCollide)
+        {
+            _canCollide = canCollide;
+        }
+
+
+
         public double X
         {
             get { return _ball.X; }
@@ -62,7 +75,8 @@ namespace Logic
             get { return _ball.XVelocity; }
             set
             {
-                _ball.XVelocity = value;
+                
+                    _ball.XVelocity = value;
 
             }
         }
@@ -72,7 +86,7 @@ namespace Logic
             get { return _ball.YVelocity; }
             set
             {
-                _ball.YVelocity = value;
+                    _ball.YVelocity = value;
             }
         }
 
