@@ -111,6 +111,45 @@ namespace Logic
                 }
             }
 
+            private void BallColision( IBallLogic ballLogic)
+            {
+                foreach( IBallLogic checkedBall in GetBalls())
+                {
+                    if ( ballLogic == checkedBall)
+                    {
+                        continue;
+                    }
+
+                    double xGap = ballLogic.X - checkedBall.X;
+                    double yGap = ballLogic.Y - checkedBall.Y;
+                    double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na długość wektora między punktami A i B
+
+                    if (distance <= checkedBall.Radius + ballLogic.Radius)
+                    {
+                        /*double newVelocityX = ((checkedBall.XVelocity * (checkedBall.Weight - ballLogic.Weight) + (ballLogic.Weight * ballLogic.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
+                        ballLogic.XVelocity = ((ballLogic.XVelocity * (ballLogic.Weight - checkedBall.Weight) + (checkedBall.Weight * checkedBall.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
+                        checkedBall.XVelocity = newVelocityX;
+
+                        double newVelocityY = ((checkedBall.YVelocity * (checkedBall.Weight - ballLogic.Weight)) + (ballLogic.Weight * ballLogic.YVelocity * 2) / (checkedBall.Weight + ballLogic.Weight));
+                        ballLogic.YVelocity = ((ballLogic.YVelocity * (ballLogic.Weight - checkedBall.Weight)) + (checkedBall.Weight * checkedBall.YVelocity * 2) / (checkedBall.Weight + ballLogic.Weight));
+                        checkedBall.YVelocity = newVelocityY;
+                        */
+
+                        double newVelocityBuffor = ballLogic.XVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight));                    
+                        ballLogic.XVelocity = ballLogic.XVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
+                        checkedBall.XVelocity = newVelocityBuffor;
+
+                        newVelocityBuffor = ballLogic.YVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.YVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight));
+                        ballLogic.YVelocity = ballLogic.YVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.YVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
+                        checkedBall.YVelocity = newVelocityBuffor;
+
+
+                    }
+
+
+                }
+            }
+
         }
     }
 }

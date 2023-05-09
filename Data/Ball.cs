@@ -153,5 +153,8 @@ namespace Data
         }
 
         public int Radius => _radius;
+
+        public int Weight => _weight;
+
     }
 }

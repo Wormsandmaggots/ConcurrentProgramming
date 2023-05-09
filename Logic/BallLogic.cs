@@ -80,5 +80,10 @@ namespace Logic
         {
             get { return _ball.Radius; }
         }
+
+        public int Weight
+        {
+            get { return _ball.Weight; }
+        }
     }
 }
