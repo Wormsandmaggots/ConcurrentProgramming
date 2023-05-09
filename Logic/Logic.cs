@@ -1,4 +1,6 @@
 ﻿using Data;
+using Microsoft.VisualBasic;
+using System.ComponentModel;
 
 namespace Logic
 {
@@ -29,7 +31,7 @@ namespace Logic
 
             public override void CreateScene(int width, int height, int ballsAmount, int radius)
             {
-                if(_scene != null)
+                if (_scene != null)
                 {
                     foreach (IBallLogic ballLogic in GetBalls())
                     {
@@ -39,10 +41,15 @@ namespace Logic
 
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
+              //  foreach (IBallLogic ballLogic in GetBalls())
+                //{
+               //     ballLogic.PropertyChanged += Update;
+              //  }
+
             }
             public override IBallLogic CreateBall(int x, int y, int radius, int width, int height)
             {
-                return new BallLogic(_dataApi.CreateBall(x,y,radius, width, height));
+                return new BallLogic(_dataApi.CreateBall(x, y, radius, width, height));
             }
 
             public override List<IBallLogic> GetBalls()
@@ -64,6 +71,44 @@ namespace Logic
             {
                 return _scene.Enabled;
             }
+
+
+          /*  private void Update(object sender, PropertyChangedEventArgs ev)
+            {
+                IBallLogic ballLogic = (IBallLogic)sender;
+                if (ev.PropertyName == "Position")
+                {
+                    // CheckCollision(orb);
+                }
+
+            }
+          */
+
+
+            private void BorderCollision (IBallLogic ballLogic)
+            {
+                if ((ballLogic.X + ballLogic.Radius) >= _scene.Width)
+                {
+                    ballLogic.XVelocity = -ballLogic.XVelocity;
+                    ballLogic.X = _scene.Width - ballLogic.Radius;
+                }
+                if ((ballLogic.X - ballLogic.Radius) <= 0)
+                {
+                    ballLogic.XVelocity = -ballLogic.XVelocity;
+                    ballLogic.X = ballLogic.Radius;
+                }
+                if ((ballLogic.Y + ballLogic.Radius) >= _scene.Height)
+                {
+                    ballLogic.YVelocity = -ballLogic.YVelocity;
+                    ballLogic.Y = _scene.Height - ballLogic.Radius;
+                }
+                if ((ballLogic.Y - ballLogic.Radius) <= 0)
+                {
+                    ballLogic.YVelocity = -ballLogic.YVelocity;
+                    ballLogic.Y = ballLogic.Radius;
+                }
+            }
+
         }
     }
 }

@@ -54,6 +54,26 @@ namespace Logic
             }
         }
 
+        public double XVelocity
+        {
+            get { return _ball.XVelocity; }
+            set
+            {
+                _ball.XVelocity = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double YVelocity
+        {
+            get { return _ball.YVelocity; }
+            set
+            {
+                _ball.YVelocity = value;
+                OnPropertyChanged();
+            }
+        }
+
         public int Radius
         {
             get { return _ball.Radius; }

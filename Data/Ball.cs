@@ -18,13 +18,13 @@ namespace Data
             _y = y;
             _radius = radius;
             Random random = new Random();
-            _weight = random.Next(1, 5);
+            _weight = 1;
             double yVelocity = random.NextDouble()*0.99;
             double xVelocity = random.NextDouble()*0.99;
-            //double yVelocity = Math.Sqrt(4 - (xVelocity * xVelocity));
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
             this._velocity[0] = xVelocity;
             this._velocity[1] = yVelocity;
+
             //_move = new Task(async () =>
             //{
             //    while (true)
@@ -130,6 +130,26 @@ namespace Data
             set
             {
                 _y = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double XVelocity
+        {
+            get { return _velocity[0]; }
+            set
+            {
+                _velocity[0] = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public double YVelocity
+        {
+            get { return _velocity[1]; }
+            set
+            {
+                _velocity[2] = value;
                 OnPropertyChanged();
             }
         }
