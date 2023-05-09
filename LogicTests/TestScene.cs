@@ -1,13 +1,14 @@
-﻿namespace Logic
+﻿
+namespace LogicTests
 {
-    internal class Scene : IScene
+    internal class TestScene : IScene
     {
         private int _width;
         private int _height;
         private List<IBallLogic> _balls = new List<IBallLogic>();
         private bool _enabled;
 
-        public Scene(int width, int height)
+        public TestScene(int width, int height)
         {
             _width = width;
             _height = height;
@@ -15,7 +16,7 @@
 
         public void GenerateBallsList(int ballsAmount, int ballsRadius)
         {
-            foreach(IBallLogic ball in _balls)
+            foreach (IBallLogic ball in _balls)
             {
                 ball.Dispose();
             }
@@ -31,7 +32,7 @@
                 int x = r.Next(ballsRadius, _width - ballsRadius);
                 int y = r.Next(ballsRadius, _height - ballsRadius);
 
-                _balls.Add(api.CreateBall(x,y, ballsRadius, _width, _height));
+                _balls.Add(api.CreateBall(x, y, ballsRadius, _width, _height));
             }
 
             Enabled = true;
@@ -48,7 +49,7 @@
 
                 _enabled = value;
 
-                foreach(IBallLogic b in _balls)
+                foreach (IBallLogic b in _balls)
                 {
                     b.ToggleBall(value);
                 }

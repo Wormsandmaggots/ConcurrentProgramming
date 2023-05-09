@@ -11,7 +11,7 @@ namespace LogicTests
         [TestInitialize]
         public void Initialize()
         {
-            _logicApi = AbstractLogicApi.CreateApi();
+            _logicApi = CreateLogicTestApi.GetLogicTestApi();
             _radius = 1;
             _width = 640;
             _height = 640;

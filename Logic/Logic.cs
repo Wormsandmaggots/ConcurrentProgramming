@@ -20,7 +20,7 @@ namespace Logic
         {
             private AbstractDataApi _dataApi;
 
-            private Scene _scene;
+            private IScene _scene;
 
             public LogicApi()
             {

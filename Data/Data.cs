@@ -15,7 +15,6 @@
             {
                 return new Ball(x, y, radius, width, height);
             }
-
         }
     }
 }

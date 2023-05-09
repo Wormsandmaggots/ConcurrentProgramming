@@ -1,7 +1,7 @@
 ﻿
-
 using Logic;
 using Model;
+using ModelTest;
 
 namespace BallModelTest
 {
@@ -9,7 +9,6 @@ namespace BallModelTest
     public class ModelApiTest
     {
         AbstractModelApi api;
-        //AbstractLogicApi logicApi;
         IBallLogic b;
         IBallModel ballModel;
         public int radius;
@@ -23,7 +22,7 @@ namespace BallModelTest
         public void Initialize()
         {
             //logicApi = AbstractLogicApi.CreateApi();
-            api = AbstractModelApi.CreateApi();
+            api = CreateModelApiTest.GetModelTestApi();
            
             x = 5;
             y = 5;

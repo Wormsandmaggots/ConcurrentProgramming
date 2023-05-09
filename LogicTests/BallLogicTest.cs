@@ -1,6 +1,4 @@
 ﻿
-using Logic;
-
 namespace LogicTests
 {
     [TestClass]
@@ -21,7 +19,7 @@ namespace LogicTests
             _xBorder = 640;
             _yBorder = 640;
 
-            _api = AbstractLogicApi.CreateApi();
+            _api = CreateLogicTestApi.GetLogicTestApi();
         }
 
         [TestMethod]

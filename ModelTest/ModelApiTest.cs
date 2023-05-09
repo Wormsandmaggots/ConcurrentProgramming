@@ -15,7 +15,7 @@ namespace ModelTest
         [TestInitialize]
         public void Initialize()
         {
-            api = AbstractModelApi.CreateApi();
+            api = CreateModelApiTest.GetModelTestApi();
             radius = 1;
             ballsCount = 10;
 

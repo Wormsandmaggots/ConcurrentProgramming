@@ -12,7 +12,7 @@ namespace DataTests
         [TestInitialize]
         public void Initialize()
         {
-            _dataApi = AbstractDataApi.CreateDataApi();
+            _dataApi = CreateDataTestApi.GetDataTestApi();
             _radius = 1;
 
             _width = 520;
