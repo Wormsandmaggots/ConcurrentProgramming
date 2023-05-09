@@ -130,6 +130,7 @@ namespace Data
             {
                 _y = value;
                 OnPropertyChanged();
+
             }
         }
 
@@ -139,7 +140,6 @@ namespace Data
             set
             {
                 _velocity[0] = value;
-                OnPropertyChanged();
             }
         }
 
@@ -149,7 +149,6 @@ namespace Data
             set
             {
                 _velocity[2] = value;
-                OnPropertyChanged();
             }
         }
 

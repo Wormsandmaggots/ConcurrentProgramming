@@ -42,6 +42,8 @@ namespace Logic
             set
             {
                 _ball.X = value;
+                OnPropertyChanged();
+
             }
         }
 
@@ -51,6 +53,7 @@ namespace Logic
             set
             {
                 _ball.Y = value;
+                OnPropertyChanged();
             }
         }
 
@@ -60,7 +63,7 @@ namespace Logic
             set
             {
                 _ball.XVelocity = value;
-                OnPropertyChanged();
+
             }
         }
 
@@ -70,7 +73,6 @@ namespace Logic
             set
             {
                 _ball.YVelocity = value;
-                OnPropertyChanged();
             }
         }
 
