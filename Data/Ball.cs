@@ -19,8 +19,8 @@ namespace Data
             _radius = radius;
             Random random = new Random();
             _weight = 1;
-            double yVelocity = random.NextDouble();
-            double xVelocity = random.NextDouble();
+            double yVelocity = random.NextDouble() * 4;
+            double xVelocity = random.NextDouble() * 4;
             xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
             this._velocity[0] = xVelocity;
