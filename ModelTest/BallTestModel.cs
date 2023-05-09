@@ -66,7 +66,6 @@ namespace ModelTest
             get { return radius; } //no setter cause it's hardocded
         }
 
-        double IBallModel.XHandler { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        double IBallModel.YHandler { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
     }
 }
