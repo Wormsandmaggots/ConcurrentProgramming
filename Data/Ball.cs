@@ -1,9 +1,13 @@
-﻿namespace Data
+﻿using System;
+
+namespace Data
 {
     internal class Ball : IBall
     {
-        private int _x, _y;
+        private double _x, _y;
         private int _radius;
+        private int _weight; //TODO:: w razie czego zmienić na double
+        private double[] _velocity = new double[2];
         private bool _canMove;
 
         public event Action PropertyChanged;
@@ -13,7 +17,14 @@
             _x = x;
             _y = y;
             _radius = radius;
-
+            Random random = new Random();
+            _weight = random.Next(1, 5);
+            double yVelocity = random.NextDouble()*0.99;
+            double xVelocity = random.NextDouble()*0.99;
+            //double yVelocity = Math.Sqrt(4 - (xVelocity * xVelocity));
+            yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
+            this._velocity[0] = xVelocity;
+            this._velocity[1] = yVelocity;
             //_move = new Task(async () =>
             //{
             //    while (true)
@@ -32,7 +43,7 @@
             {
                 while (true)
                 {
-                    MoveBallRandomly(width, height, 1);
+                    MoveBallRandomly(width, height, xVelocity, yVelocity);
 
                     await Task.Delay(5);
 
@@ -40,51 +51,52 @@
                 }
             };
 
+
             ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, int moveDistance)
+        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
         {
             Random r = new Random();
 
-            int x = r.Next(-1, 2);
-            int y;
+              double x = this._x;
+              double y = this._y;
 
-            do
-            {
-                y = r.Next(-1, 2);
+             /* do
+              {
+                  y = r.Next(-1, 2);
 
-            } while (x == 0 && y == 0);
+              } while (x == 0 && y == 0);*/
 
-            x *= moveDistance;
-            y *= moveDistance;
+              x += xVelocity;
+              y += yVelocity;
 
-            if (X + x + Radius > xBorder)
-            {
-                X = xBorder - Radius;
-            }
-            else if (X + x - Radius < 0)
-            {
-                X = Radius;
-            }
-            else
-            {
-                X = X + x;
-            }
+              if (X + x + Radius > xBorder)
+              {
+                  X = xBorder - Radius;
+              }
+              else if (X + x - Radius < 0)
+              {
+                  X = Radius;
+              }
+              else
+              {
+                  X = x;
+              }
 
 
-            if (Y + y + Radius > yBorder)
-            {
-                Y = yBorder - Radius;
-            }
-            else if (Y + y - Radius < 0)
-            {
-                Y = Radius;
-            }
-            else
-            {
-                Y = Y + y;
-            }
+              if (Y + y + Radius > yBorder)
+              {
+                  Y = yBorder - Radius;
+              }
+              else if (Y + y - Radius < 0)
+              {
+                  Y = Radius;
+              }
+              else
+              {
+                  Y = y;
+              }
         }
 
         public void OnPropertyChanged()
@@ -102,7 +114,7 @@
             //_move.Dispose();
         }
 
-        public int X
+        public double X
         {
             get { return _x; }
             set
@@ -112,7 +124,7 @@
             }
         }
 
-        public int Y
+        public double Y
         {
             get { return _y; }
             set

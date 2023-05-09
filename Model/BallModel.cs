@@ -6,8 +6,8 @@ namespace Model
 {
     internal class BallModel : IBallModel
     {
-        public int x;
-        public int y;
+        public double x;
+        public double y;
         public int radius;
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -39,7 +39,7 @@ namespace Model
             PropertyChanged = (PropertyChangedEventHandler)Delegate.RemoveAll(PropertyChanged, PropertyChanged);
         }
 
-        public int XHandler
+        public double XHandler
         {
             get { return x; }
             set
@@ -49,7 +49,7 @@ namespace Model
             }
         }
 
-        public int YHandler
+        public double YHandler
         {
             get { return y; }
             set

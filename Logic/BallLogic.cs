@@ -36,7 +36,7 @@ namespace Logic
             _ball.Dispose();
         }
 
-        public int X
+        public double X
         {
             get { return _ball.X; }
             set
@@ -45,7 +45,7 @@ namespace Logic
             }
         }
 
-        public int Y
+        public double Y
         {
             get { return _ball.Y; }
             set
