@@ -73,9 +73,8 @@ namespace Logic
             }
 
 
-           private void Update2(object sender)
+           private void Update2(IBallLogic ballLogic)
             {
-                IBallLogic ballLogic = (IBallLogic)sender;
                 CheckCollision(ballLogic);
             }
 
@@ -92,58 +91,64 @@ namespace Logic
 
             private void BorderCollision(IBallLogic ball)
             {
-                lock(ball)
-                {
+                
                     if (ball.X + ball.Radius > _scene.Width)
                     {
-                        ball.XVelocity = -ball.XVelocity;
-                        ball.X = _scene.Width - ball.Radius;
+                        if (ball.XVelocity > 0)
+                            ball.XVelocity = -ball.XVelocity;
+                    //może w momencie zmiany prędkości ustawić inną pozycje i wtedy to jest w ball
+                        //ball.X = _scene.Width - ball.Radius;
                     }
                     else if (ball.X - ball.Radius < 0)
                     {
+                    if (ball.XVelocity < 0)
                         ball.XVelocity = -ball.XVelocity;
-                        ball.X = ball.Radius;
+                    
+                        //ball.X = ball.Radius;
                     }
 
 
                     if (ball.Y + ball.Radius > _scene.Height)
                     {
+                    if (ball.YVelocity > 0)
                         ball.YVelocity = -ball.YVelocity;
-                        ball.Y = _scene.Height - ball.Radius;
+                        //ball.Y = _scene.Height - ball.Radius;
                     }
                     else if (ball.Y - ball.Radius < 0)
                     {
+                    if (ball.YVelocity < 0)
                         ball.YVelocity = -ball.YVelocity;
-                        ball.Y = ball.Radius;
+                    
+                        //ball.Y = ball.Radius;
                     }
-                }
+                
             }
 
+            private object _lock = new object();
+
             private void BallColision( IBallLogic ballLogic)
-
-            { 
- 
-                foreach( IBallLogic checkedBall in GetBalls())
+            {
+                lock (_lock)
                 {
-                    if ( ballLogic == checkedBall)
+                    foreach (IBallLogic checkedBall in GetBalls())
                     {
-                        continue;
-                    }
-
-                    
-                    double xGap = ballLogic.X - checkedBall.X;
-                    double yGap = ballLogic.Y - checkedBall.Y;
-
-                    double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na długość wektora między punktami A i B
-
-
-                    if (Math.Abs(distance) <= checkedBall.Radius + ballLogic.Radius)
-                    {
-                        ballLogic.SetCanCollide(false);
-                        checkedBall.SetCanCollide(false);
-
-                        lock (this)
+                        if (ballLogic == checkedBall)
                         {
+                            continue;
+                        }
+
+
+                        double xGap = ballLogic.X - checkedBall.X;
+                        double yGap = ballLogic.Y - checkedBall.Y;
+
+                        double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na długość wektora między punktami A i B
+
+
+                        if (Math.Abs(distance) < checkedBall.Radius + ballLogic.Radius)
+                        {
+                            ballLogic.SetCanCollide(false);
+                            checkedBall.SetCanCollide(false);
+
                             double newVelocityBuffor = ballLogic.XVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight));
                             ballLogic.XVelocity = ballLogic.XVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
                             checkedBall.XVelocity = newVelocityBuffor;
@@ -152,21 +157,20 @@ namespace Logic
                             ballLogic.YVelocity = ballLogic.YVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.YVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
                             checkedBall.YVelocity = newVelocityBuffor;
 
+                            Action<Object> a = async (Object) =>
+                            {
+
+                                await Task.Delay(80);
+                                ballLogic.SetCanCollide(true);
+                                checkedBall.SetCanCollide(true);
+                            };
+
+                            ThreadPool.QueueUserWorkItem(new WaitCallback(a));
+
+                            return;
                         }
 
-                        Action<Object> a = async (Object) =>
-                        {
-                            
-                            await Task.Delay(80);
-                            ballLogic.SetCanCollide(true);
-                            checkedBall.SetCanCollide(true);
-                        };
-
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(a));
-
-                        return;
                     }
-
                 }
             }
 

@@ -61,7 +61,7 @@ namespace Model
 
             public override void MakeScene(int ballsCount, int radius)
             {
-                logicApi.CreateScene(520, 500, ballsCount, radius);
+                logicApi.CreateScene(500, 495, ballsCount, radius);
             }
 
             public override ObservableCollection<IBallModel> GetAllBalls()

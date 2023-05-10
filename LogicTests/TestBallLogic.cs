@@ -4,7 +4,7 @@ namespace LogicTests
 {
     internal class TestBallLogic : IBallLogic
     {
-        public event Action<Object> PropertyChanged;
+        public event Action<IBallLogic> PropertyChanged;
         private bool _canCollide = true;
 
         private IBall _ball;
@@ -52,22 +52,13 @@ namespace LogicTests
         public double X
         {
             get { return _ball.X; }
-            set
-            {
-                _ball.X = value;
-                OnPropertyChanged();
-
-            }
+            
         }
 
         public double Y
         {
             get { return _ball.Y; }
-            set
-            {
-                _ball.Y = value;
-                OnPropertyChanged();
-            }
+            
         }
 
         public double XVelocity

@@ -9,6 +9,9 @@ namespace Data
         private int _weight;
         private double[] _velocity = new double[2];
         private bool _canMove = true;
+        private float _initialDelay = 20f;
+        private int _delay;
+        private object _lock = new object();
 
         public event Action PropertyChanged;
 
@@ -31,12 +34,16 @@ namespace Data
             {
                 while (true)
                 {
-                    lock(this)
+                    
+                    MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+
+                    lock(_lock)
                     {
-                        MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+                        _delay = (int)(_initialDelay/Math.Sqrt(xVelocity * xVelocity + yVelocity * yVelocity));
                     }
 
-                    await Task.Delay(5);
+                    //zmienić to żeby było zależne od prędkości
+                    await Task.Delay(_delay);
 
                     if (_canMove == false) return;
                 }
@@ -76,7 +83,8 @@ namespace Data
         public double X
         {
             get { return _x; }
-            set
+
+            private set
             {
                 _x = value;
                 OnPropertyChanged();
@@ -86,7 +94,8 @@ namespace Data
         public double Y
         {
             get { return _y; }
-            set
+
+            private set
             {
                 _y = value;
                 OnPropertyChanged();

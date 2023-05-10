@@ -2,8 +2,9 @@
 {
     public interface IBall : IDisposable
     {
-        abstract double X { get; set; }
-        abstract double Y { get; set; }
+        //zmienić settery na prywatne
+        abstract double X { get; }
+        abstract double Y { get; }
         abstract int Radius { get; }
         abstract int Weight { get; }
         abstract double XVelocity { get; set; }
