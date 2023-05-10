@@ -96,15 +96,11 @@ namespace Logic
                     {
                         if (ball.XVelocity > 0)
                             ball.XVelocity = -ball.XVelocity;
-                    //może w momencie zmiany prędkości ustawić inną pozycje i wtedy to jest w ball
-                        //ball.X = _scene.Width - ball.Radius;
                     }
                     else if (ball.X - ball.Radius < 0)
                     {
                     if (ball.XVelocity < 0)
                         ball.XVelocity = -ball.XVelocity;
-                    
-                        //ball.X = ball.Radius;
                     }
 
 
@@ -112,14 +108,11 @@ namespace Logic
                     {
                     if (ball.YVelocity > 0)
                         ball.YVelocity = -ball.YVelocity;
-                        //ball.Y = _scene.Height - ball.Radius;
                     }
                     else if (ball.Y - ball.Radius < 0)
                     {
                     if (ball.YVelocity < 0)
                         ball.YVelocity = -ball.YVelocity;
-                    
-                        //ball.Y = ball.Radius;
                     }
                 
             }
