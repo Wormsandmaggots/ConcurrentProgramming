@@ -143,15 +143,7 @@ namespace Logic
                             
                             ballLogic.SetCanCollide(false);
                             checkedBall.SetCanCollide(false);
-                          /* 
-                            double newVelocityBuffor = ballLogic.XVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + checkedBall.Weight)) + checkedBall.XVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + checkedBall.Weight));
-                            ballLogic.XVelocity = ballLogic.XVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + checkedBall.Weight)) + checkedBall.XVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + checkedBall.Weight));
-                            checkedBall.XVelocity = newVelocityBuffor;
-
-                            newVelocityBuffor = ballLogic.YVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + checkedBall.Weight)) + checkedBall.YVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + checkedBall.Weight));
-                            ballLogic.YVelocity = ballLogic.YVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + checkedBall.Weight)) + checkedBall.YVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + checkedBall.Weight));
-                            checkedBall.YVelocity = newVelocityBuffor;*/
-
+                           
                             double newVelocityX = ((checkedBall.XVelocity * (checkedBall.Weight - ballLogic.Weight) + (ballLogic.Weight * ballLogic.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
                             ballLogic.XVelocity = ((ballLogic.XVelocity * (ballLogic.Weight - checkedBall.Weight) + (checkedBall.Weight * checkedBall.XVelocity * 2)) / (checkedBall.Weight + ballLogic.Weight));
                             checkedBall.XVelocity = newVelocityX;
