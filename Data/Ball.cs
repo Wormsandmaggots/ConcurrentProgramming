@@ -31,7 +31,7 @@ namespace Data
                 while (true)
                 {
                     
-                    MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+                    MoveBall(width, height, _velocity[0], _velocity[1]);
 
                     lock(_lock)
                     {
@@ -48,7 +48,7 @@ namespace Data
             ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
+        public void MoveBall(int xBorder, int yBorder, double xVelocity, double yVelocity)
         {
               double x = this._x;
               double y = this._y;

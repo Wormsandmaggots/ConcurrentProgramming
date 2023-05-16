@@ -9,7 +9,7 @@
 
         event Action PropertyChanged;
 
-        abstract void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity);
+        abstract void MoveBall(int xBorder, int yBorder, double xVelocity, double yVelocity);
 
         abstract void ToggleBall(bool val);
     }

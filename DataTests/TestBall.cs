@@ -29,7 +29,7 @@ namespace DataTests
                 {
                     lock (this)
                     {
-                        MoveBallRandomly(width, height, _velocity[0], _velocity[1]);
+                        MoveBall(width, height, _velocity[0], _velocity[1]);
                     }
 
                     await Task.Delay(5);
@@ -42,7 +42,7 @@ namespace DataTests
             ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
-        public void MoveBallRandomly(int xBorder, int yBorder, double xVelocity, double yVelocity)
+        public void MoveBall(int xBorder, int yBorder, double xVelocity, double yVelocity)
         {
             double x = this._x;
             double y = this._y;
