@@ -12,9 +12,9 @@ namespace DataTests
 
     internal sealed class DataTestApi : AbstractDataApi
     {
-        public override IBall CreateBall(int x, int y, int radius, int width, int height)
+        public override IBall CreateBall(int x, int y, int width, int height)
         {
-            return new TestBall(x, y, radius, width, height);
+            return new TestBall(x, y, width, height);
         }
     }
 }

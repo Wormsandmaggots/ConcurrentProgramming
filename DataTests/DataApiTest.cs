@@ -22,10 +22,9 @@ namespace DataTests
         [TestMethod]
         public void CreateBallTest()
         {
-            IBall b = _dataApi.CreateBall(_x, _y, _radius, _width, _height);
+            IBall b = _dataApi.CreateBall(_x, _y, _width, _height);
 
             Assert.IsNotNull(b, null);
-            Assert.AreEqual(b.Radius, _radius);
         }
     }
 }

@@ -5,8 +5,6 @@ namespace Data
     internal class Ball : IBall
     {
         private double _x, _y;
-        private int _radius;
-        private int _weight;
         private double[] _velocity = new double[2];
         private bool _canMove = true;
         private float _initialDelay = 20f;
@@ -15,15 +13,13 @@ namespace Data
 
         public event Action PropertyChanged;
 
-        public Ball(int x, int y, int radius, int width, int height)
+        public Ball(int x, int y, int width, int height)
         {
             _x = x;
             _y = y;
-            _radius = radius;
             Random random = new Random();
-            _weight = 1;
-            double yVelocity = random.NextDouble() * 4.5;
-            double xVelocity = random.NextDouble() * 4.5;
+            double yVelocity = random.NextDouble() * 4.5f;
+            double xVelocity = random.NextDouble() * 4.5f;
             xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
             this._velocity[0] = xVelocity;
@@ -42,7 +38,6 @@ namespace Data
                         _delay = (int)(_initialDelay/Math.Sqrt(xVelocity * xVelocity + yVelocity * yVelocity));
                     }
 
-                    //zmienić to żeby było zależne od prędkości
                     await Task.Delay(_delay);
 
                     if (_canMove == false) return;
@@ -120,10 +115,6 @@ namespace Data
                 _velocity[1] = value;
             }
         }
-
-        public int Radius => _radius;
-
-        public int Weight => _weight;
 
     }
 }

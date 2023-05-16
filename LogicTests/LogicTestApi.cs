@@ -45,7 +45,7 @@ namespace LogicTests
         }
         public override IBallLogic CreateBall(int x, int y, int radius, int width, int height)
         {
-            return new TestBallLogic(_dataApi.CreateBall(x, y, radius, width, height));
+            return new TestBallLogic(_dataApi.CreateBall(x, y, width, height), radius);
         }
 
         public override List<IBallLogic> GetBalls()

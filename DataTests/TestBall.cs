@@ -5,20 +5,16 @@ namespace DataTests
     internal class TestBall : IBall
     {
         private double _x, _y;
-        private int _radius;
-        private int _weight;
         private double[] _velocity = new double[2];
         private bool _canMove = true;
 
         public event Action PropertyChanged;
 
-        public TestBall(int x, int y, int radius, int width, int height)
+        public TestBall(int x, int y, int width, int height)
         {
             _x = x;
             _y = y;
-            _radius = radius;
             Random random = new Random();
-            _weight = 1;
             double yVelocity = random.NextDouble() * 4.5;
             double xVelocity = random.NextDouble() * 4.5;
             xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
@@ -111,9 +107,5 @@ namespace DataTests
                 _velocity[1] = value;
             }
         }
-
-        public int Radius => _radius;
-
-        public int Weight => _weight;
     }
 }

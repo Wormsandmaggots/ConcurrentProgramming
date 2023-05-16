@@ -6,12 +6,15 @@ namespace Logic
     {
         public event Action<IBallLogic> PropertyChanged;
         private bool _canCollide = true;
+        private int _radius;
+        private int _weight = 1;
 
         private IBall _ball;
 
-        public BallLogic(IBall ball)
+        public BallLogic(IBall ball, int radius)
         {
             _ball = ball;
+            _radius = radius;
             _ball.PropertyChanged += Update;
         }
 
@@ -81,12 +84,12 @@ namespace Logic
 
         public int Radius
         {
-            get { return _ball.Radius; }
+            get { return _radius; }
         }
 
         public int Weight
         {
-            get { return _ball.Weight; }
+            get { return _weight; }
         }
     }
 }
