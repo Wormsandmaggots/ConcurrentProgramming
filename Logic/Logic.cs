@@ -74,9 +74,15 @@ namespace Logic
             }
 
 
-           private void Update2(IBallLogic ballLogic)
+            private object _lock = new object();
+
+
+
+            private void Update2(IBallLogic ballLogic)
             {
-                CheckCollision(ballLogic);
+                lock(_lock) { 
+                  CheckCollision(ballLogic);
+                }
             }
 
             private void CheckCollision(IBallLogic ball)
@@ -118,12 +124,10 @@ namespace Logic
                 
             }
 
-            private object _lock = new object();
-
             private void BallColision(IBallLogic ballLogic)
             {
-                lock (_lock)
-                {
+                ///lock (_lock)
+                //{
                     foreach (IBallLogic checkedBall in GetBalls())
                     {
                         if (ballLogic == checkedBall)
@@ -165,7 +169,7 @@ namespace Logic
                         }
 
                     }
-                }
+               // }
             }
 
         }
