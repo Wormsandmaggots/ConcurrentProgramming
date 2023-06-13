@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using Data;
+using System.Numerics;
 
 namespace Logic
 {
@@ -7,6 +8,7 @@ namespace Logic
         abstract Vector2 Position { get; }
         abstract Vector2 Velocity { get; set; }
         abstract bool CanCollide();
+        abstract IBall GetBall();
         abstract void SetCanCollide(bool canCollide);
         abstract int Radius { get; }
         abstract int Weight { get; }

@@ -51,6 +51,11 @@ namespace Logic
             _canCollide = canCollide;
         }
 
+        public IBall GetBall()
+        {
+            return _ball;
+        }
+
         public int Radius
         {
             get { return _radius; }

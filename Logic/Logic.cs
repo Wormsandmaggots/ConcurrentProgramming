@@ -1,6 +1,4 @@
 ﻿using Data;
-using Microsoft.VisualBasic;
-using System.ComponentModel;
 using System.Numerics;
 
 namespace Logic
@@ -27,6 +25,11 @@ namespace Logic
 
             public LogicApi()
             {
+                if (_logger == null)
+                    _logger = AbstractLogger.CreateLogger();
+
+                _logger.ToFile();
+
                 _dataApi = AbstractDataApi.CreateDataApi();
             }
 
@@ -97,6 +100,8 @@ namespace Logic
    
             }
 
+            private static AbstractLogger _logger;
+
             private void BorderCollision(IBallLogic ball)
             {
                 Vector2 pos = ball.Position;
@@ -151,8 +156,6 @@ namespace Logic
 
             private void BallColision(IBallLogic ballLogic)
             {
-                ///lock (_lock)
-                //{
                 Vector2 pos = ballLogic.Position;
                 Vector2 vel = ballLogic.Velocity;
 
@@ -175,10 +178,10 @@ namespace Logic
 
                     if (Math.Abs(distance) < checkedBall.Radius + ballLogic.Radius)
                     {
-                            
+
                         ballLogic.SetCanCollide(false);
                         checkedBall.SetCanCollide(false);
-                           
+
                         double newCheckedXVel = ((checkedVel.X * (checkedBall.Weight - ballLogic.Weight) + (ballLogic.Weight * vel.X * 2)) / (checkedBall.Weight + ballLogic.Weight));
                         double newBallLogicXVel = ((vel.X * (ballLogic.Weight - checkedBall.Weight) + (checkedBall.Weight * checkedVel.X * 2)) / (checkedBall.Weight + ballLogic.Weight));
 
@@ -196,14 +199,12 @@ namespace Logic
                         };
 
                         ThreadPool.QueueUserWorkItem(new WaitCallback(a));
-                            
+
+                        _logger.ToQueue(ballLogic.GetBall(), checkedBall.GetBall());
                         return;
                     }
-
                 }
-               // }
             }
-
         }
     }
 }

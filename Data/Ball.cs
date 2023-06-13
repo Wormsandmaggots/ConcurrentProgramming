@@ -42,7 +42,6 @@ namespace Data
 
                     await Task.Delay(_delay);
                     stopWatch.Start();
-                    _logger.ToFile();
                     if (_canMove == false) return;
                 }
             };
