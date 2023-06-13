@@ -24,27 +24,6 @@ namespace DataTests
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
 
             _velocity = new Vector2(xVelocity, yVelocity);
-
-            Action<Object> move = async void (Object state) =>
-            {
-                while (true)
-                {
-
-                    MoveBall(width, height, _velocity);
-
-                    lock (_lock)
-                    {
-                        _delay = (int)(_initialDelay / Math.Sqrt(xVelocity * xVelocity + yVelocity * yVelocity));
-                    }
-
-                    //await Task.Delay(_delay);
-
-                    if (_canMove == false) return;
-                }
-            };
-
-
-           // ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
         public void MoveBall(int xBorder, int yBorder, Vector2 velocity)

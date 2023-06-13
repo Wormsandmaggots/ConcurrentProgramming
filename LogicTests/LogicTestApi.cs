@@ -25,7 +25,7 @@ namespace LogicTests
 
         public LogicTestApi()
         {
-            _dataApi = AbstractDataApi.CreateDataApi();
+            _dataApi = CreateDataTestApi.GetDataTestApi();
         }
 
         public override void CreateScene(int width, int height, int ballsAmount, int radius)

@@ -1,6 +1,3 @@
-
-using Logic;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using System.Numerics;
 
 namespace LogicTests
@@ -62,11 +59,14 @@ namespace LogicTests
 
             Vector2 velVec = ball.Velocity;
 
+            ball.Velocity = new Vector2(-1, -1);
+            velVec = ball.Velocity;
+
             if(velVec.X < 0)
             {
                 velVec.X = -velVec.X;
             }
-            if (velVec.Y< 0)
+            if (velVec.Y < 0)
             {
                 velVec.Y = -velVec.Y;
             }
