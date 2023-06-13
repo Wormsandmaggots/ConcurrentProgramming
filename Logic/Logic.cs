@@ -26,9 +26,10 @@ namespace Logic
             public LogicApi()
             {
                 if (_logger == null)
+                {
                     _logger = AbstractLogger.CreateLogger();
-
-                _logger.ToFile();
+                    _logger.ToFile();
+                }
 
                 _dataApi = AbstractDataApi.CreateDataApi();
             }
@@ -45,7 +46,7 @@ namespace Logic
 
                 _scene = new Scene(width, height);
                 _scene.GenerateBallsList(ballsAmount, radius);
-              foreach (IBallLogic ballLogic in GetBalls())
+                foreach (IBallLogic ballLogic in GetBalls())
                 {
                     ballLogic.PropertyChanged += Update2;
                 }
