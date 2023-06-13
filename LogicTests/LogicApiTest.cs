@@ -8,7 +8,7 @@ namespace LogicTests
     public class LogicApiTests
     {
         private AbstractLogicApi _logicApi;
-        private int _x, _y, _radius;
+        private int _x1, _y1, _x2, _y2, _radius;
         private int _width, _height, _amount;
         private LogicTestApi _logicTestApi;
 
@@ -21,12 +21,13 @@ namespace LogicTests
             _height = 640;
             _amount = 5;
             _logicTestApi = new LogicTestApi();
+         
         }
 
         [TestMethod]
         public void CreateBallLogicTest()
         {
-            IBallLogic b = _logicApi.CreateBall(_x, _y, _radius, _width, _height);
+            IBallLogic b = _logicApi.CreateBall(_x1, _y1, _radius, _width, _height);
 
             Assert.IsNotNull(b);
             Assert.AreEqual(b.Radius, _radius);
@@ -50,16 +51,12 @@ namespace LogicTests
         [TestMethod]
         public void BorderCollisionTest()
         {
-            _logicTestApi.CreateScene(_width, _height, 2, _radius);
+            _x1 = _width;
+            _y1 = _height;
 
-            IBallLogic ball = _logicTestApi.GetBalls()[0];
+            IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
 
-            Vector2 posVec = ball.Position;
             Vector2 velVec = ball.Velocity;
-
-            posVec.X = _width;
-            posVec.Y = _height;
-            ball.Position = posVec;
 
             if(velVec.X < 0)
             {
@@ -72,20 +69,21 @@ namespace LogicTests
 
             ball.Velocity = velVec;
 
-            _logicTestApi.CheckCollision(ball);
+            _logicTestApi.BorderCollision(ball);
 
-            Vector2 PostposVec = ball.Position;
             Vector2 PostvelVec = ball.Velocity;
 
             Assert.AreEqual(PostvelVec.X, -velVec.X);
             Assert.AreEqual(PostvelVec.Y, -velVec.Y);
 
-            posVec = ball.Position;
-            velVec = ball.Velocity;
 
-            posVec.X = 0;
-            posVec.Y = 0;
-            ball.Position = posVec;
+            _x1 = 0;
+            _y1 = 0;
+
+            IBallLogic ball2 = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
+
+
+            velVec = ball2.Velocity;
 
             if (velVec.X > 0)
             {
@@ -96,12 +94,11 @@ namespace LogicTests
                 velVec.Y = -velVec.Y;
             }
 
-            ball.Velocity = velVec;
+            ball2.Velocity = velVec;
 
-            _logicTestApi.CheckCollision(ball);
+            _logicTestApi.BorderCollision(ball2);
 
-            PostposVec = ball.Position;
-            PostvelVec = ball.Velocity;
+            PostvelVec = ball2.Velocity;
 
             Assert.AreEqual(PostvelVec.X, -velVec.X);
             Assert.AreEqual(PostvelVec.Y, -velVec.Y);

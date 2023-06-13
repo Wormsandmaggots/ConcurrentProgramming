@@ -87,7 +87,7 @@ namespace LogicTests
 
         }
 
-        private void BorderCollision(IBallLogic ball)
+        public void BorderCollision(IBallLogic ball)
         {
             Vector2 pos = ball.Position;
             Vector2 vel = ball.Velocity;
