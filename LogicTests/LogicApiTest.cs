@@ -54,8 +54,8 @@ namespace LogicTests
         public void BorderCollisionTest()
         {
             _logicTestApi.CreateScene(_width, _height, 0, _radius);
-            _x1 = _width + 1;
-            _y1 = _height + 1;
+            _x1 = _width + _radius * 2;
+            _y1 = _height + _radius * 2;
 
 
             IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
