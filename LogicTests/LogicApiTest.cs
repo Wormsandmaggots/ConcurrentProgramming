@@ -1,5 +1,6 @@
 
 using Logic;
+using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using System.Numerics;
 
 namespace LogicTests
@@ -8,7 +9,7 @@ namespace LogicTests
     public class LogicApiTests
     {
         private AbstractLogicApi _logicApi;
-        private int _x1, _y1, _x2, _y2, _radius;
+        private int _x1, _y1, _x2, _y2, _radius, _weight;
         private int _width, _height, _amount;
         private LogicTestApi _logicTestApi;
 
@@ -20,6 +21,7 @@ namespace LogicTests
             _width = 640;
             _height = 640;
             _amount = 5;
+            _weight = 1;
             _logicTestApi = new LogicTestApi();
          
         }
@@ -116,46 +118,73 @@ namespace LogicTests
             _x2 = 300;
             _y2 = 300;
 
-            _x1 = _x2 + _radius;
-            _y1 = _y2 + _radius;
+            _x1 = _x2;
+            _y1 = _y2;
             IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
             IBallLogic ball2 = _logicTestApi.CreateBall(_x2, _y2, _radius, _width, _height);
 
 
-            Vector2 velVec = ball.Velocity;
-
-            Vector2 velVec2 = ball2.Velocity;
-
-            double newCheckedXVel = ((velVec2.X * (ball2.Weight - ball.Weight) + (ball.Weight * velVec.X * 2)) / (ball2.Weight + ball.Weight));
-            double newBallLogicXVel = ((velVec.X * (ball.Weight - ball2.Weight) + (ball2.Weight * velVec2.X * 2)) / (ball2.Weight + ball.Weight));
-
-            double newCheckedYVel = ((velVec2.Y * (ball2.Weight - ball.Weight)) + (ball.Weight * velVec.Y * 2) / (ball2.Weight + ball.Weight));
-            double newBallLogicYVel = ((velVec.Y * (ball.Weight - ball2.Weight)) + (ball2.Weight * velVec2.Y * 2) / (ball2.Weight + ball.Weight));
-
-            Vector2 newVelball = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
-            Vector2 newVelball2 = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
-
+            List<Vector2> afterCollision = newVelocity(ball.Velocity, ball.Position, ball2.Velocity, ball2.Position);
 
             _logicTestApi.BallColision(ball);
 
-            velVec = ball.Velocity;
-            velVec2 = ball2.Velocity;
+            Vector2 velVec = ball.Velocity;
+            Vector2 velVec2 = ball2.Velocity;
 
-           /* posVec.X = posVec2.X + 50;
-            posVec.Y = posVec2.Y + 10;
-
-
-
-            ball.Velocity = posVec;
-           */
-
-            Assert.AreEqual(newVelball, velVec);
-            Assert.AreEqual(newVelball2, velVec2);
+            Assert.AreEqual(afterCollision[0], velVec);
+            Assert.AreEqual(afterCollision[1], velVec2);
 
             Assert.AreEqual(true, ball.CanCollide());
             Assert.AreEqual(true, ball2.CanCollide());
 
 
+        }
+
+        private List<Vector2> newVelocity(Vector2 vel, Vector2 pos, Vector2 checkedVel, Vector2 checkedPos)
+        {
+            List<Vector2> velocities = new List<Vector2>();
+
+            double xGap = pos.X - checkedPos.X;
+            double yGap = pos.Y - checkedPos.Y;
+
+            double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na d³ugoœæ wektora miêdzy punktami A i B
+
+
+            if (Math.Abs(distance) < _radius + _radius)
+            {
+
+                //   ballLogic.SetCanCollide(false);
+                //   checkedBall.SetCanCollide(false);
+
+                double newCheckedXVel = ((checkedVel.X * (_weight - _weight) + (_weight * vel.X * 2)) / (_weight + _weight));
+                double newBallLogicXVel = ((vel.X * (_weight - _weight) + (_weight * checkedVel.X * 2)) / (_weight + _weight));
+
+                double newCheckedYVel = ((checkedVel.Y * (_weight - _weight)) + (_weight * vel.Y * 2) / (_weight + _weight));
+                double newBallLogicYVel = ((vel.Y * (_weight - _weight)) + (_weight * checkedVel.Y * 2) / (_weight + _weight));
+
+                Vector2 ballVelocity = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
+                Vector2 ball2Velocity = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
+
+                /* Action<Object> a = async (Object) =>
+                 {
+                     // await Task.Delay(80);
+                     ballLogic.SetCanCollide(true);
+                     checkedBall.SetCanCollide(true);
+                 };
+                 //  ThreadPool.QueueUserWorkItem(new WaitCallback(a));
+
+                 _logger.ToQueue(ballLogic.GetBall(), checkedBall.GetBall());
+                 return;*/
+
+                
+
+                velocities.Add(ballVelocity);
+                velocities.Add(ball2Velocity);
+
+                
+            }
+
+            return velocities;
         }
     }
 }
