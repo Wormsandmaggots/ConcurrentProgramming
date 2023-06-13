@@ -73,5 +73,7 @@ namespace LogicTests
         {
             get { return _weight; }
         }
+
+
     }
 }

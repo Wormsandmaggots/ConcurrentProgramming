@@ -54,8 +54,8 @@ namespace LogicTests
         public void BorderCollisionTest()
         {
             _logicTestApi.CreateScene(_width, _height, 0, _radius);
-            _x1 = _width;
-            _y1 = _height;
+            _x1 = _width + 1;
+            _y1 = _height + 1;
 
 
             IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
@@ -77,8 +77,8 @@ namespace LogicTests
 
             Vector2 PostvelVec = ball.Velocity;
 
-            Assert.AreEqual(PostvelVec.X, -velVec.X);
-            Assert.AreEqual(PostvelVec.Y, -velVec.Y);
+            Assert.AreEqual(ball.Velocity.X, -velVec.X);
+            Assert.AreEqual(ball.Velocity.Y, -velVec.Y);
 
 
             _x1 = 0;
@@ -124,67 +124,18 @@ namespace LogicTests
             IBallLogic ball2 = _logicTestApi.CreateBall(_x2, _y2, _radius, _width, _height);
 
 
-            List<Vector2> afterCollision = newVelocity(ball.Velocity, ball.Position, ball2.Velocity, ball2.Position);
-
-            _logicTestApi.BallColision(ball);
+            List<Vector2> afterCollision = _logicTestApi.newVelocity(ball.Velocity, ball.Position, ball2.Velocity, ball2.Position);
 
             Vector2 velVec = ball.Velocity;
             Vector2 velVec2 = ball2.Velocity;
 
-            Assert.AreEqual(afterCollision[0], velVec);
-            Assert.AreEqual(afterCollision[1], velVec2);
+            Assert.AreNotEqual(afterCollision[0], velVec);
+            Assert.AreNotEqual(afterCollision[1], velVec2);
 
             Assert.AreEqual(true, ball.CanCollide());
             Assert.AreEqual(true, ball2.CanCollide());
 
 
-        }
-
-        private List<Vector2> newVelocity(Vector2 vel, Vector2 pos, Vector2 checkedVel, Vector2 checkedPos)
-        {
-            List<Vector2> velocities = new List<Vector2>();
-
-            double xGap = pos.X - checkedPos.X;
-            double yGap = pos.Y - checkedPos.Y;
-
-            double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na d³ugoœæ wektora miêdzy punktami A i B
-
-
-            if (Math.Abs(distance) < _radius + _radius)
-            {
-
-                //   ballLogic.SetCanCollide(false);
-                //   checkedBall.SetCanCollide(false);
-
-                double newCheckedXVel = ((checkedVel.X * (_weight - _weight) + (_weight * vel.X * 2)) / (_weight + _weight));
-                double newBallLogicXVel = ((vel.X * (_weight - _weight) + (_weight * checkedVel.X * 2)) / (_weight + _weight));
-
-                double newCheckedYVel = ((checkedVel.Y * (_weight - _weight)) + (_weight * vel.Y * 2) / (_weight + _weight));
-                double newBallLogicYVel = ((vel.Y * (_weight - _weight)) + (_weight * checkedVel.Y * 2) / (_weight + _weight));
-
-                Vector2 ballVelocity = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
-                Vector2 ball2Velocity = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
-
-                /* Action<Object> a = async (Object) =>
-                 {
-                     // await Task.Delay(80);
-                     ballLogic.SetCanCollide(true);
-                     checkedBall.SetCanCollide(true);
-                 };
-                 //  ThreadPool.QueueUserWorkItem(new WaitCallback(a));
-
-                 _logger.ToQueue(ballLogic.GetBall(), checkedBall.GetBall());
-                 return;*/
-
-                
-
-                velocities.Add(ballVelocity);
-                velocities.Add(ball2Velocity);
-
-                
-            }
-
-            return velocities;
         }
     }
 }

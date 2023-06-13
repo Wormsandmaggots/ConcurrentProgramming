@@ -21,6 +21,8 @@ namespace LogicTests
 
         private IScene _scene;
 
+        
+
         public LogicTestApi()
         {
             _dataApi = AbstractDataApi.CreateDataApi();
@@ -139,7 +141,6 @@ namespace LogicTests
 
         }
 
-        private static AbstractLogger _logger;
         public void BallColision(IBallLogic ballLogic)
         {
             Vector2 pos = ballLogic.Position;
@@ -177,18 +178,33 @@ namespace LogicTests
                     ballLogic.Velocity = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
                     checkedBall.Velocity = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
 
-                    Action<Object> a = async (Object) =>
-                    {
-                       // await Task.Delay(80);
-                        ballLogic.SetCanCollide(true);
-                        checkedBall.SetCanCollide(true);
-                    };
-                  //  ThreadPool.QueueUserWorkItem(new WaitCallback(a));
-
-                    _logger.ToQueue(ballLogic.GetBall(), checkedBall.GetBall());
-                    return;
+                    ballLogic.SetCanCollide(true);
+                    checkedBall.SetCanCollide(true);
+                   
+                  return;
                 }
+
             }
+        }
+
+        private int _weigth = 1;
+        public List<Vector2> newVelocity(Vector2 vel, Vector2 pos, Vector2 checkedVel, Vector2 checkedPos)
+        {
+            List<Vector2> velocities = new List<Vector2>();
+            int _weight = 1;
+
+            double newCheckedXVel = ((checkedVel.X * (_weight - _weight) + (_weight * vel.X * 2)) / (_weight + _weight));
+            double newBallLogicXVel = ((vel.X * (_weight - _weight) + (_weight * checkedVel.X * 2)) / (_weight + _weight));
+
+            double newCheckedYVel = ((checkedVel.Y * (_weight - _weight)) + (_weight * vel.Y * 2) / (_weight + _weight));
+            double newBallLogicYVel = ((vel.Y * (_weight - _weight)) + (_weight * checkedVel.Y * 2) / (_weight + _weight));
+
+            Vector2 ballVelocity = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
+            Vector2 ball2Velocity = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
+
+            velocities.Add(ballVelocity);
+            velocities.Add(ball2Velocity);
+            return velocities;
         }
     }
 }
