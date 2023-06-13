@@ -1,4 +1,6 @@
-﻿namespace Logic
+﻿using Data;
+
+namespace Logic
 {
     internal class Scene : IScene
     {

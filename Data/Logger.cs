@@ -12,34 +12,36 @@ using System.Xml.Serialization;
 
 namespace Data
 {
-    internal class Logger
+    internal class Logger : AbstractLogger
     {
         private readonly string _pathToFile;
         //private static List<IBall> balls;
         private Stopwatch stopWatch = new Stopwatch();
-        XmlSerializer serializer = new XmlSerializer(typeof(IBall));
+        //XmlSerializer serializer = new XmlSerializer(typeof(IBall));
         private static ConcurrentQueue<string> queue = new ConcurrentQueue<string>();
-        private readonly Mutex queueMutex = new();
+        //private readonly Mutex queueMutex = new();
 
         public Logger(/*List<IBall> balls*/)
         {
             string PathToSave = Path.GetTempPath();
-            _pathToFile = PathToSave + "Logging.xml";
+            _pathToFile = PathToSave + "Logging.json";
 
-            FileStream file = File.Create(_pathToFile);
-            StreamWriter sw = new StreamWriter(file);
-            /*string data = "{\"BallsDiameter\": 20, ": ";
-            sw.WriteLine(data);
-            sw.Flush();
-            sw.Close();*/
-
+            if (!File.Exists(_pathToFile))
+            {
+                FileStream file = File.Create(_pathToFile);
+                StreamWriter sw = new StreamWriter(file);
+                /*string data = "{\"BallsDiameter\": 20, ": ";
+                sw.WriteLine(data);
+                sw.Flush();
+                sw.Close();*/
+            }
 
 
             // balls = balls;
         }
 
 
-        public void ToQueue(IBall ball)
+        public override void ToQueue(IBall ball)
         {
             stopWatch.Stop();
             TimeSpan timeLasted = stopWatch.Elapsed;
@@ -68,11 +70,11 @@ namespace Data
             queue.Enqueue(serializedBall);
         }
 
-        public void ToFile()
+        public override void ToFile()
         {
             Thread t = new Thread(() =>
             {
-                stopWatch.Start();
+                //stopWatch.Start();
                 while (true)
                 {
                     if (/*event na zderzenie*/ stopWatch.ElapsedMilliseconds >= 5)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Numerics;
 
 namespace Data
@@ -11,6 +12,8 @@ namespace Data
         private float _initialDelay = 20f;
         private int _delay;
         private object _lock = new object();
+        private AbstractLogger _logger = AbstractLogger.CreateLogger();
+        Stopwatch stopWatch = new Stopwatch();
 
         public event Action PropertyChanged;
 
@@ -31,14 +34,15 @@ namespace Data
                 {
                     
                     MoveBall(width, height, _velocity);
-
+                    
                     lock(_lock)
                     {
                         _delay = (int)(_initialDelay/Math.Sqrt(xVelocity * xVelocity + yVelocity * yVelocity));
                     }
 
                     await Task.Delay(_delay);
-
+                    stopWatch.Start();
+                    _logger.ToFile();
                     if (_canMove == false) return;
                 }
             };
