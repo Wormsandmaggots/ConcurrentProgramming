@@ -1,4 +1,5 @@
 ﻿using Data;
+using System.Numerics;
 
 namespace LogicTests
 {
@@ -50,38 +51,21 @@ namespace LogicTests
             _canCollide = canCollide;
         }
 
-
-
-        public double X
+        public IBall GetBall()
         {
-            get { return _ball.X; }
-            
+            return _ball;
         }
 
-        public double Y
+        public Vector2 Position
         {
-            get { return _ball.Y; }
-            
+            get { return _ball.Position; }
+            set { _ball.Position = value; }
         }
 
-        public double XVelocity
+        public Vector2 Velocity
         {
-            get { return _ball.XVelocity; }
-            set
-            {
-
-                _ball.XVelocity = value;
-
-            }
-        }
-
-        public double YVelocity
-        {
-            get { return _ball.YVelocity; }
-            set
-            {
-                _ball.YVelocity = value;
-            }
+            get { return _ball.Velocity; }
+            set { _ball.Velocity = value; }
         }
 
         public int Radius

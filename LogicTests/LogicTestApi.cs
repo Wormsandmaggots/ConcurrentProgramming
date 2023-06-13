@@ -2,7 +2,8 @@
 using Data;
 using Logic;
 using static System.Formats.Asn1.AsnWriter;
-
+using System.Numerics;
+using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 
 namespace LogicTests
 {
@@ -75,7 +76,7 @@ namespace LogicTests
             CheckCollision(ballLogic);
         }
 
-        private void CheckCollision(IBallLogic ball)
+        public void CheckCollision(IBallLogic ball)
         {
             BorderCollision(ball);
 
@@ -88,89 +89,111 @@ namespace LogicTests
 
         private void BorderCollision(IBallLogic ball)
         {
+            Vector2 pos = ball.Position;
+            Vector2 vel = ball.Velocity;
 
-            if (ball.X + ball.Radius > _scene.Width)
+            bool hasChanged = false;
+
+            if (pos.X + ball.Radius > _scene.Width)
             {
-                if (ball.XVelocity > 0)
-                    ball.XVelocity = -ball.XVelocity;
-                //może w momencie zmiany prędkości ustawić inną pozycje i wtedy to jest w ball
-                //ball.X = _scene.Width - ball.Radius;
+                if (vel.X > 0)
+                {
+                    vel.X = -vel.X;
+                    hasChanged = true;
+                }
+
             }
-            else if (ball.X - ball.Radius < 0)
+            else if (pos.X - ball.Radius < 0)
             {
-                if (ball.XVelocity < 0)
-                    ball.XVelocity = -ball.XVelocity;
-
-                //ball.X = ball.Radius;
+                if (vel.X < 0)
+                {
+                    vel.X = -vel.X;
+                    hasChanged = true;
+                }
             }
 
 
-            if (ball.Y + ball.Radius > _scene.Height)
+            if (pos.Y + ball.Radius > _scene.Height)
             {
-                if (ball.YVelocity > 0)
-                    ball.YVelocity = -ball.YVelocity;
-                //ball.Y = _scene.Height - ball.Radius;
-            }
-            else if (ball.Y - ball.Radius < 0)
-            {
-                if (ball.YVelocity < 0)
-                    ball.YVelocity = -ball.YVelocity;
+                if (vel.Y > 0)
+                {
+                    vel.Y = -vel.Y;
+                    hasChanged = true;
+                }
 
-                //ball.Y = ball.Radius;
+            }
+            else if (pos.Y - ball.Radius < 0)
+            {
+                if (vel.Y < 0)
+                {
+                    vel.Y = -vel.Y;
+                    hasChanged = true;
+                }
+
+            }
+
+            if (hasChanged)
+            {
+                ball.Velocity = vel;
             }
 
         }
 
-        private object _lock = new object();
-
-        private void BallColision(IBallLogic ballLogic)
+        private static AbstractLogger _logger;
+        public void BallColision(IBallLogic ballLogic)
         {
-            lock (_lock)
+            Vector2 pos = ballLogic.Position;
+            Vector2 vel = ballLogic.Velocity;
+
+            foreach (IBallLogic checkedBall in GetBalls())
             {
-                foreach (IBallLogic checkedBall in GetBalls())
+                if (ballLogic == checkedBall)
                 {
-                    if (ballLogic == checkedBall)
+                    continue;
+                }
+
+                Vector2 checkedPos = checkedBall.Position;
+                Vector2 checkedVel = checkedBall.Velocity;
+
+
+                double xGap = pos.X - checkedPos.X;
+                double yGap = pos.Y - checkedPos.Y;
+
+                double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na długość wektora między punktami A i B
+
+
+                if (Math.Abs(distance) < checkedBall.Radius + ballLogic.Radius)
+                {
+
+                    ballLogic.SetCanCollide(false);
+                    checkedBall.SetCanCollide(false);
+
+                    double newCheckedXVel = ((checkedVel.X * (checkedBall.Weight - ballLogic.Weight) + (ballLogic.Weight * vel.X * 2)) / (checkedBall.Weight + ballLogic.Weight));
+                    double newBallLogicXVel = ((vel.X * (ballLogic.Weight - checkedBall.Weight) + (checkedBall.Weight * checkedVel.X * 2)) / (checkedBall.Weight + ballLogic.Weight));
+
+                    double newCheckedYVel = ((checkedVel.Y * (checkedBall.Weight - ballLogic.Weight)) + (ballLogic.Weight * vel.Y * 2) / (checkedBall.Weight + ballLogic.Weight));
+                    double newBallLogicYVel = ((vel.Y * (ballLogic.Weight - checkedBall.Weight)) + (checkedBall.Weight * checkedVel.Y * 2) / (checkedBall.Weight + ballLogic.Weight));
+
+                    ballLogic.Velocity = new Vector2((float)newBallLogicXVel, (float)newBallLogicYVel);
+                    checkedBall.Velocity = new Vector2((float)newCheckedXVel, (float)newCheckedYVel);
+
+                    Action<Object> a = async (Object) =>
                     {
-                        continue;
-                    }
+                       // await Task.Delay(80);
+                        ballLogic.SetCanCollide(true);
+                        checkedBall.SetCanCollide(true);
+                    };
+                  //  ThreadPool.QueueUserWorkItem(new WaitCallback(a));
 
-
-                    double xGap = ballLogic.X - checkedBall.X;
-                    double yGap = ballLogic.Y - checkedBall.Y;
-
-                    double distance = Math.Sqrt((xGap * xGap) + (yGap * yGap)); //wzór na długość wektora między punktami A i B
-
-
-                    if (Math.Abs(distance) < checkedBall.Radius + ballLogic.Radius)
-                    {
-                        ballLogic.SetCanCollide(false);
-                        checkedBall.SetCanCollide(false);
-
-                        double newVelocityBuffor = ballLogic.XVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight));
-                        ballLogic.XVelocity = ballLogic.XVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.XVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
-                        checkedBall.XVelocity = newVelocityBuffor;
-
-                        newVelocityBuffor = ballLogic.YVelocity * ((2 * ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.YVelocity * ((checkedBall.Weight - ballLogic.Weight) / (ballLogic.Weight + ballLogic.Weight));
-                        ballLogic.YVelocity = ballLogic.YVelocity * ((ballLogic.Weight - checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight)) + checkedBall.YVelocity * ((2 * checkedBall.Weight) / (ballLogic.Weight + ballLogic.Weight));
-                        checkedBall.YVelocity = newVelocityBuffor;
-
-                        Action<Object> a = async (Object) =>
-                        {
-
-                            await Task.Delay(80);
-                            ballLogic.SetCanCollide(true);
-                            checkedBall.SetCanCollide(true);
-                        };
-
-                        ThreadPool.QueueUserWorkItem(new WaitCallback(a));
-
-                        return;
-                    }
-
+                    _logger.ToQueue(ballLogic.GetBall(), checkedBall.GetBall());
+                    return;
                 }
             }
         }
-
     }
 }
+
+           
+
+
 

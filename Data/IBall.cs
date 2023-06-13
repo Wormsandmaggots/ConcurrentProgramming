@@ -4,7 +4,7 @@ namespace Data
 {
     public interface IBall : IDisposable
     {
-        abstract Vector2 Position { get; }
+        abstract Vector2 Position { get; set; }
         abstract Vector2 Velocity { get; set; }
         
 

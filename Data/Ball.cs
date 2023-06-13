@@ -86,7 +86,7 @@ namespace Data
         {
             get { return pos; }
 
-            private set
+            set
             {
                 pos = value;
                 OnPropertyChanged();

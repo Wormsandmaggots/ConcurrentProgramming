@@ -37,14 +37,14 @@ namespace DataTests
                         _delay = (int)(_initialDelay / Math.Sqrt(xVelocity * xVelocity + yVelocity * yVelocity));
                     }
 
-                    await Task.Delay(_delay);
+                    //await Task.Delay(_delay);
 
                     if (_canMove == false) return;
                 }
             };
 
 
-            ThreadPool.QueueUserWorkItem(new WaitCallback(move));
+           // ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
         public void MoveBall(int xBorder, int yBorder, Vector2 velocity)
@@ -83,7 +83,7 @@ namespace DataTests
         {
             get { return pos; }
 
-            private set
+            /*private*/ set
             {
                 pos = value;
                 OnPropertyChanged();

@@ -30,5 +30,18 @@ namespace LogicTests
             Assert.IsNotNull(b);
             Assert.AreEqual(b.Radius, _radius);
         }
+
+        [TestMethod]
+        public void CanColideTest()
+        {
+            IBallLogic b = _api.CreateBall(_x, _y, _radius, _xBorder, _yBorder);
+
+            b.SetCanCollide(true);
+
+            Assert.AreEqual(true, b.CanCollide());
+
+
+        }
+
     }
 }
