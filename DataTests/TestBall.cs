@@ -83,7 +83,7 @@ namespace DataTests
         {
             get { return pos; }
 
-            /*private*/ set
+            private set
             {
                 pos = value;
                 OnPropertyChanged();

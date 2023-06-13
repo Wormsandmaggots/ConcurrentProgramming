@@ -56,11 +56,7 @@ namespace LogicTests
             return _ball;
         }
 
-        public Vector2 Position
-        {
-            get { return _ball.Position; }
-            set { _ball.Position = value; }
-        }
+        public Vector2 Position => _ball.Position;
 
         public Vector2 Velocity
         {

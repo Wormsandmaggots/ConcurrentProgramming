@@ -51,8 +51,10 @@ namespace LogicTests
         [TestMethod]
         public void BorderCollisionTest()
         {
+            _logicTestApi.CreateScene(_width, _height, 0, _radius);
             _x1 = _width;
             _y1 = _height;
+
 
             IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
 
@@ -69,7 +71,7 @@ namespace LogicTests
 
             ball.Velocity = velVec;
 
-            _logicTestApi.BorderCollision(ball);
+            _logicTestApi.CheckCollision(ball);
 
             Vector2 PostvelVec = ball.Velocity;
 
@@ -96,7 +98,7 @@ namespace LogicTests
 
             ball2.Velocity = velVec;
 
-            _logicTestApi.BorderCollision(ball2);
+            _logicTestApi.CheckCollision(ball2);
 
             PostvelVec = ball2.Velocity;
 
@@ -108,22 +110,21 @@ namespace LogicTests
         [TestMethod]
         public void BallCollisionTest()
         {
-            _logicTestApi.CreateScene(_width, _height, 2, _radius);
+            _logicTestApi.CreateScene(_width, _height, 0, _radius);
 
-            IBallLogic ball = _logicTestApi.GetBalls()[0];
-            IBallLogic ball2 = _logicTestApi.GetBalls()[1];
 
-            Vector2 posVec = ball.Position;
+            _x2 = 300;
+            _y2 = 300;
+
+            _x1 = _x2 + _radius;
+            _y1 = _y2 + _radius;
+            IBallLogic ball = _logicTestApi.CreateBall(_x1, _y1, _radius, _width, _height);
+            IBallLogic ball2 = _logicTestApi.CreateBall(_x2, _y2, _radius, _width, _height);
+
+
             Vector2 velVec = ball.Velocity;
 
-            Vector2 posVec2 = ball2.Position;
             Vector2 velVec2 = ball2.Velocity;
-
-            posVec.X = posVec2.X - ball2.Radius;
-            posVec.Y = posVec2.Y - ball2.Radius;
-
-            ball.Position = posVec;
-
 
             double newCheckedXVel = ((velVec2.X * (ball2.Weight - ball.Weight) + (ball.Weight * velVec.X * 2)) / (ball2.Weight + ball.Weight));
             double newBallLogicXVel = ((velVec.X * (ball.Weight - ball2.Weight) + (ball2.Weight * velVec2.X * 2)) / (ball2.Weight + ball.Weight));
@@ -140,13 +141,13 @@ namespace LogicTests
             velVec = ball.Velocity;
             velVec2 = ball2.Velocity;
 
-            posVec.X = posVec2.X + 50;
+           /* posVec.X = posVec2.X + 50;
             posVec.Y = posVec2.Y + 10;
 
 
 
             ball.Velocity = posVec;
-
+           */
 
             Assert.AreEqual(newVelball, velVec);
             Assert.AreEqual(newVelball2, velVec2);

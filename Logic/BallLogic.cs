@@ -66,12 +66,7 @@ namespace Logic
             get { return _weight; }
         }
 
-        public Vector2 Position
-        {
-            get { return _ball.Position; }
-            set { _ball.Position = value; }
-        }
-            //=> _ball.Position;
+        public Vector2 Position => _ball.Position;
 
         public Vector2 Velocity 
         {
