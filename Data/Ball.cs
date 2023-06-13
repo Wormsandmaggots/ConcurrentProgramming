@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Numerics;
 
 namespace Data
 {
     internal class Ball : IBall
     {
-        private double _x, _y;
-        private double[] _velocity = new double[2];
+        private Vector2 pos;
+        private Vector2 _velocity;
         private bool _canMove = true;
         private float _initialDelay = 20f;
         private int _delay;
@@ -15,23 +16,21 @@ namespace Data
 
         public Ball(int x, int y, int width, int height)
         {
-            _x = x;
-            _y = y;
+            pos = new Vector2(x, y);
             Random random = new Random();
-            double yVelocity = random.NextDouble() * 4.5f;
-            double xVelocity = random.NextDouble() * 4.5f;
+            float yVelocity = (float)random.NextDouble() * 4.5f;
+            float xVelocity = (float)random.NextDouble() * 4.5f;
             xVelocity = (random.Next(-1, 1) < 0) ? xVelocity : -xVelocity;
             yVelocity = (random.Next(-1, 1) < 0) ? yVelocity : -yVelocity;
-            this._velocity[0] = xVelocity;
-            this._velocity[1] = yVelocity;
 
+            _velocity = new Vector2(xVelocity, yVelocity);
 
             Action<Object> move = async void (Object state) =>
             {
                 while (true)
                 {
                     
-                    MoveBall(width, height, _velocity[0], _velocity[1]);
+                    MoveBall(width, height, _velocity);
 
                     lock(_lock)
                     {
@@ -48,16 +47,15 @@ namespace Data
             ThreadPool.QueueUserWorkItem(new WaitCallback(move));
         }
 
-        public void MoveBall(int xBorder, int yBorder, double xVelocity, double yVelocity)
+        public void MoveBall(int xBorder, int yBorder, Vector2 velocity)
         {
-              double x = this._x;
-              double y = this._y;
+            float x = pos.X;
+            float y = pos.Y;
 
-              x += xVelocity;
-              y += yVelocity;
+            x += velocity.X;
+            y += velocity.Y;
 
-            X = x;
-            Y = y;
+            Position = new Vector2(x, y);
         }
 
         public void OnPropertyChanged()
@@ -75,44 +73,20 @@ namespace Data
             //_move.Dispose();
         }
 
-        public double X
+        public Vector2 Velocity
         {
-            get { return _x; }
+            get { return _velocity; }
+            set { _velocity = value; }
+        }
+
+        public Vector2 Position
+        {
+            get { return pos; }
 
             private set
             {
-                _x = value;
+                pos = value;
                 OnPropertyChanged();
-            }
-        }
-
-        public double Y
-        {
-            get { return _y; }
-
-            private set
-            {
-                _y = value;
-                OnPropertyChanged();
-
-            }
-        }
-
-        public double XVelocity
-        {
-            get { return _velocity[0]; }
-            set
-            {
-                _velocity[0] = value;
-            }
-        }
-
-        public double YVelocity
-        {
-            get { return _velocity[1]; }
-            set
-            {
-                _velocity[1] = value;
             }
         }
 

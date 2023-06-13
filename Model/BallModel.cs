@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using Logic;
 
@@ -20,8 +21,9 @@ namespace Model
 
         public BallModel(IBallLogic ball)
         {
-            this.x = ball.X;
-            this.y = ball.Y;
+            Vector2 pos = ball.Position;
+            this.x = pos.X;
+            this.y = pos.Y;
             this.radius = ball.Radius;
             ball.PropertyChanged += Update;
         }
@@ -30,8 +32,10 @@ namespace Model
         {
             IBallLogic toUpdateBall = (IBallLogic)source;
 
-            this.XHandler = toUpdateBall.X;
-            this.YHandler = toUpdateBall.Y;
+            Vector2 pos = toUpdateBall.Position;
+
+            this.XHandler = pos.X;
+            this.YHandler = pos.Y;
         }
 
         public void Dispose()

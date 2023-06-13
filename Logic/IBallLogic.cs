@@ -1,15 +1,15 @@
-﻿namespace Logic
+﻿using System.Numerics;
+
+namespace Logic
 {
     public interface IBallLogic : IDisposable
     {
-        abstract double X { get; }
-        abstract double Y { get; }
+        abstract Vector2 Position { get; }
+        abstract Vector2 Velocity { get; set; }
         abstract bool CanCollide();
         abstract void SetCanCollide(bool canCollide);
         abstract int Radius { get; }
         abstract int Weight { get; }
-        abstract double XVelocity { get; set; }
-        abstract double YVelocity { get; set; }
 
         event Action<IBallLogic> PropertyChanged;
         abstract void ToggleBall(bool val);

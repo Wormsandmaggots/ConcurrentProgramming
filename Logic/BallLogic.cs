@@ -1,4 +1,5 @@
 ﻿using Data;
+using System.Numerics;
 
 namespace Logic
 {
@@ -50,38 +51,6 @@ namespace Logic
             _canCollide = canCollide;
         }
 
-
-
-        public double X
-        {
-            get { return _ball.X; }
-        }
-
-        public double Y
-        {
-            get { return _ball.Y; }
-        }
-
-        public double XVelocity
-        {
-            get { return _ball.XVelocity; }
-            set
-            {
-                
-                _ball.XVelocity = value;
-
-            }
-        }
-
-        public double YVelocity
-        {
-            get { return _ball.YVelocity; }
-            set
-            {
-                _ball.YVelocity = value;
-            }
-        }
-
         public int Radius
         {
             get { return _radius; }
@@ -90,6 +59,14 @@ namespace Logic
         public int Weight
         {
             get { return _weight; }
+        }
+
+        public Vector2 Position => _ball.Position;
+
+        public Vector2 Velocity 
+        {
+            get { return _ball.Velocity; }
+            set { _ball.Velocity = value; } 
         }
     }
 }

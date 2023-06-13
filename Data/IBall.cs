@@ -1,15 +1,16 @@
-﻿namespace Data
+﻿using System.Numerics;
+
+namespace Data
 {
     public interface IBall : IDisposable
     {
-        abstract double X { get; }
-        abstract double Y { get; }
-        abstract double XVelocity { get; set; }
-        abstract double YVelocity { get; set; }
+        abstract Vector2 Position { get; }
+        abstract Vector2 Velocity { get; set; }
+        
 
         event Action PropertyChanged;
 
-        abstract void MoveBall(int xBorder, int yBorder, double xVelocity, double yVelocity);
+        abstract void MoveBall(int xBorder, int yBorder, Vector2 velocity);
 
         abstract void ToggleBall(bool val);
     }

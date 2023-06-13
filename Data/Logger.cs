@@ -49,8 +49,8 @@ namespace Data
 
             var ballJson = new
             {
-                Xvalue = ball.X.ToString(),
-                Yvalue = ball.Y.ToString(),
+                Xvalue = ball.Position.X.ToString(),
+                Yvalue = ball.Position.Y.ToString(),
                 TimeElapsed = time.ToString(),
                 BallID = id
             };
